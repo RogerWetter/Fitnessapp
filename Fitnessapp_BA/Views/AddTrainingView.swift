@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct addTrainingView: View {
+struct AddTrainingView: View {
   @Environment(\.modelContext) private var modelContext
   @State var name: String = ""
   @Environment(\.dismiss) var dismiss
@@ -19,8 +19,8 @@ struct addTrainingView: View {
   
   var body: some View {
     NavigationView {
-      TextField("Name Trainingseinheit", text: $name)
-        .textFieldStyle(.roundedBorder)
+      TextField("Training Title", text: $name)
+        .textFieldStyle(.plain)
         .padding()
         .navigationTitle("New Training")
         .navigationBarTitleDisplayMode(.inline)
@@ -38,6 +38,7 @@ struct addTrainingView: View {
           ToolbarItemGroup(placement: .navigationBarTrailing) {
             Button(action: createTraining) {
               Text("Create")
+                .fontWeight(name.isEmpty ? .regular : .semibold)
             }
             .disabled(name.isEmpty)
           }
@@ -57,6 +58,6 @@ struct addTrainingView: View {
 }
 
 #Preview {
-  addTrainingView()
+  AddTrainingView()
     .modelContainer(for: Training.self, inMemory: true)
 }

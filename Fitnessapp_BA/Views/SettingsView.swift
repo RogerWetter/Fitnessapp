@@ -8,11 +8,19 @@
 import SwiftUI
 
 struct SettingsView: View {
-    var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+  
+  @Environment(\.dismiss) var dismiss
+  
+  var body: some View {
+    Text("Change here the Settings!")
+    Button {
+      dismiss()
+    } label: {
+      Text("Close")
     }
+  }
 }
 
 #Preview {
-    SettingsView()
+  SettingsView()
 }

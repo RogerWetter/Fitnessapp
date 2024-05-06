@@ -11,11 +11,35 @@ import SwiftData
 struct HomeView: View {
   @Environment(\.modelContext) private var modelContext
   @Query private var trainings: [Training]
-  @State private var isShowingExerciseView = false
-  @State private var isShowingaddTrainingView = false
+  @State private var isShowingActiveTrainingView = false
+  @State private var isShowingSettingsView = false
+  @State private var isShowingAddTrainingView = false
+  
+  
+  @State var searchingText = ""
+  
+  var filteredExercises: [Training] {
+    guard !searchingText.isEmpty else { return trainings }
+    
+    return trainings.filter { training in
+      training.name.lowercased().contains(searchingText.lowercased())
+    }
+  }
   
   var body: some View {
     NavigationSplitView {
+      HStack {
+        Text("Trainings")
+          .font(.headline)
+        Spacer()
+        NavigationLink {
+          AllExercisesView()
+        } label: {
+          Label("All Exercises", systemImage: "figure.strengthtraining.traditional")
+            .labelStyle(.titleOnly)
+        }
+      }
+      .padding(/*@START_MENU_TOKEN@*/.horizontal/*@END_MENU_TOKEN@*/)
       List {
         Section {
           ForEach(trainings) { training in
@@ -39,27 +63,32 @@ struct HomeView: View {
           Label("Add Training", systemImage: "plus")
         }
       }
+      .searchable(text: $searchingText)
       .toolbar {
         ToolbarItem(placement: .navigationBarTrailing) {
-          EditButton()
-        }
-        ToolbarItem {
-          Button(action: addTraining) {
-            Label("Add Training", systemImage: "plus")
+          Button(action: openSettings) {
+            Label("open Settings", systemImage: "gearshape").foregroundStyle(.gray)
           }
         }
       }
+        .navigationTitle("Home")
     } detail: {
       Text("Select a Training")
     }
-    .sheet(isPresented: $isShowingaddTrainingView) {
-      addTrainingView()
+    .sheet(isPresented: $isShowingAddTrainingView) {
+      AddTrainingView().presentationDetents([.fraction(0.20)])
+    }
+    .fullScreenCover(isPresented: $isShowingActiveTrainingView) {
+      ActiveTrainingView(training: trainings[0])// richtiges Training muss noch mitgegeben werden!
+    }
+    .fullScreenCover(isPresented: $isShowingSettingsView) {
+      SettingsView()
     }
   }
   
   private func addTraining() {
     withAnimation {
-      isShowingaddTrainingView.toggle()
+      isShowingAddTrainingView.toggle()
     }
   }
   
@@ -72,7 +101,13 @@ struct HomeView: View {
   }
   
   private func startTraining() {
-    //isShowingExerciseView = true
+    isShowingActiveTrainingView.toggle()
+  }
+  
+  private func openSettings() {
+    withAnimation {
+      isShowingSettingsView.toggle()
+    }
   }
 }
 

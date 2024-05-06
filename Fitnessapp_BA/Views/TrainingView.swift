@@ -11,11 +11,25 @@ struct TrainingView: View {
   
   @Bindable var training: Training
   
+  
+  @State var searchingText = ""
+  
+  var filteredExercises: [Exercise] {
+    guard !searchingText.isEmpty else { return training.Exercises }
+    
+    return training.Exercises.filter { exercise in
+      exercise.name.lowercased().contains(searchingText.lowercased())
+    }
+  }
+  
+  @State private var isShowingAddExerciseView = false
+  @State private var isShowingActiveTrainingView = false
+  
   var body: some View {
     List {
-      ForEach(training.Exercises) { exercise in
+      ForEach(filteredExercises) { exercise in
         NavigationLink {
-          //ExerciseView(exercise: exercise)
+          ActiveTrainingView(training: training)
           
         } label: {
           ExerciseRow(exercise: exercise)
@@ -23,28 +37,41 @@ struct TrainingView: View {
         }
       }
       .onDelete(perform: deleteExercise)
-      
-      Button(action: addExercise) {
-        Label("Add Exercise", systemImage: "plus")
-      }
-    }
-    .toolbar {
-      ToolbarItem(placement: .navigationBarTrailing) {
-        EditButton()
-      }
-      ToolbarItem {
+      Section {
         Button(action: addExercise) {
           Label("Add Exercise", systemImage: "plus")
         }
       }
     }
+    .searchable(text: $searchingText)
+    .toolbar {
+      ToolbarItem(placement: .navigationBarTrailing) {
+        EditButton()
+      }
+      ToolbarItem {
+        Button(action: startTraining) {
+          Label("Start Training", systemImage: "play.circle.fill").font(.title).foregroundStyle(.accent)
+        }
+        .labelStyle(.iconOnly)
+      }
+    }
+    .navigationTitle(training.name)
+    .sheet(isPresented: $isShowingAddExerciseView) {
+      AddExerciseView(training: training).presentationDetents([.large])
+    }
+    .fullScreenCover(isPresented: $isShowingActiveTrainingView) {
+      ActiveTrainingView(training: training)
+    }
   }
   
   private func addExercise() {
     withAnimation {
-      let newExercise = Exercise()
-      training.Exercises.append(newExercise)
+      isShowingAddExerciseView.toggle()
     }
+  }
+  
+  private func startTraining() {
+    isShowingActiveTrainingView.toggle()
   }
   
   private func deleteExercise(offsets: IndexSet) {
@@ -57,8 +84,8 @@ struct TrainingView: View {
 }
 
 
- #Preview {
- TrainingView(training: Training())
-     .modelContainer(for: Training.self, inMemory: true)
- }
- 
+// #Preview {
+// TrainingView(training: Training())
+//     .modelContainer(for: Training.self, inMemory: true)
+// }
+

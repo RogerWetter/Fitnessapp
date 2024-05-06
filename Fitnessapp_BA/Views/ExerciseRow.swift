@@ -12,21 +12,54 @@ struct ExerciseRow: View {
   let exercise: Exercise
   
   var body: some View {
-    HStack {
-      VStack {
+    HStack(alignment: .center) {
+      VStack(alignment: .leading) {
         HStack {
-          ForEach(exercise.muscleGroups) { muscleGroup in
-            Text(muscleGroup.name)
+          MuscleGroupRow(muscleGroups: exercise.muscleGroups)
+          if let device = exercise.device {
+            Text(device)
+              .font(.caption)
+          }
+        }
+        Text(exercise.name).font(.title)
+        HStack {
+          if let weight = exercise.weight {
+            Text("\(weight) kg")
+              .font(.caption)
+          }
+          if let repetitions = exercise.repetitions {
+            Text("\(repetitions) \(Image(systemName: "arrow.clockwise"))")
+              .font(.caption)
+          }
+          if let sets = exercise.sets {
+            Text("\(sets) \(Image(systemName: "arrow.triangle.2.circlepath"))")
+              .font(.caption)
+          }
+          if let setTime = exercise.setTime {
+            Text("\(setTime)' \(Image(systemName: "clock.arrow.2.circlepath"))")
+              .font(.caption)
+          }
+          if let setPause = exercise.setPause {
+            Text("\(setPause)' \(Image(systemName: "pause"))")
+              .font(.caption)
           }
           
         }
-        Text(exercise.name).font(.title)
       }
+      Spacer()
+      if let image = exercise.image {
+        Image(uiImage: UIImage(data: image)!)
+          .resizable()
+          .frame(width: 100, height: 100)
+          .cornerRadius(10)
+      }
+      
+      
     }
   }
 }
 
-//#Preview {
-//  ExerciseRow(exercise: Exercise())
-//    .modelContainer(for: Exercise.self, inMemory: true)
-//}
+#Preview {
+  ExerciseRow(exercise: Exercise(name: "Brustpresse", device: "E10", weight: 70, repetitions: 10, setPause: 3, setTime: 3, image: UIImage(named: "Brustzug")?.pngData()))
+    .modelContainer(for: Exercise.self, inMemory: true)
+}

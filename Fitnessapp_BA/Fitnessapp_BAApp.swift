@@ -12,7 +12,8 @@ import SwiftData
 struct Fitnessapp_BAApp: App {
     var sharedModelContainer: ModelContainer = {
         let schema = Schema([
-            Item.self,
+            Training.self,
+            Exercise.self,
         ])
         let modelConfiguration = ModelConfiguration(schema: schema, isStoredInMemoryOnly: false)
 

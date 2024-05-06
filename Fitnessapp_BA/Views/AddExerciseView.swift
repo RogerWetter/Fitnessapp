@@ -6,23 +6,62 @@
 //
 
 import SwiftUI
+import SwiftData
 
-struct addExerciseView: View {
+struct AddExerciseView: View {
+  
   @Environment(\.modelContext) private var modelContext
-  @State var name: String = ""
+  @Query private var exercises: [Exercise]
+  @State var searchingText = ""
+  
+  var filteredExercises: [Exercise] {
+    guard !searchingText.isEmpty else { return exercises }
+    
+    return exercises.filter { exercise in
+      exercise.name.lowercased().contains(searchingText.lowercased())
+    }
+  }
+  
+  @Bindable var training: Training
+  
+  @State private var exercisesToAdd: [Exercise] = []
+  
+  @State private var isShowingCreateExerciseView = false
+  
   @Environment(\.dismiss) var dismiss
-  @State private var isTextFieldFocused = false
   
   var body: some View {
     NavigationView {
-      TextField("Name Trainingseinheit", text: $name)
-        .textFieldStyle(.roundedBorder)
-        .padding()
-        .navigationTitle("Neue Trainingseinheit")
-        .navigationBarTitleDisplayMode(.inline)
-        .onAppear {
-          isTextFieldFocused = true
+      VStack {
+        List {
+          Button(action: createExercise) {
+            Label("create Exercise", systemImage: "plus")
+          }
+          Section {
+            ForEach(filteredExercises) { exercise in
+              HStack() {
+                ExerciseRow(exercise: exercise)
+                Spacer()
+                Button {
+                  if exercisesToAdd.contains(exercise) {
+                    exercisesToAdd.removeAll(where: {
+                      $0 == exercise
+                    })
+                  } else {
+                    exercisesToAdd.append(exercise)
+                  }
+                } label: {
+                  Image(systemName: exercisesToAdd.contains(exercise) ? "checkmark.circle" : "plus.circle")
+                    .imageScale(.large)
+                }
+              }
+            }
+          }
         }
+        .searchable(text: $searchingText)
+      }
+        .navigationTitle("Add to \(training.name)")
+        .navigationBarTitleDisplayMode(.inline)
         .toolbar {
           ToolbarItemGroup(placement: .navigationBarLeading) {
             Button(action: dismissAction) {
@@ -31,12 +70,14 @@ struct addExerciseView: View {
             .foregroundColor(.red)
           }
           ToolbarItemGroup(placement: .navigationBarTrailing) {
-            Button(action: createTraining) {
-              Text("Create")
+            Button(action: doneAction) {
+              Text("Done")
+                .fontWeight(.semibold)
             }
-            .disabled(name.isEmpty)
-            .keyboardShortcut(.defaultAction)
           }
+        }
+        .sheet(isPresented: $isShowingCreateExerciseView) {
+          CreateExerciseView().presentationDetents([.large])
         }
     }
   }
@@ -45,14 +86,17 @@ struct addExerciseView: View {
     dismiss()
   }
   
-  private func createTraining() {
-    let newTraining = Training(name: name)
-    modelContext.insert(newTraining)
+  private func doneAction() {
+    training.Exercises.append(contentsOf: exercisesToAdd)
     dismiss()
+  }
+  
+  private func createExercise() {
+    isShowingCreateExerciseView.toggle()
   }
 }
 
 #Preview {
-    addExerciseView()
+    AddExerciseView(training: Training())
     .modelContainer(for: Training.self, inMemory: true)
 }

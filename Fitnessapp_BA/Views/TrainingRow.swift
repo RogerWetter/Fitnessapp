@@ -15,15 +15,7 @@ struct TrainingRow: View {
   var body: some View {
     HStack {
       VStack(alignment: .leading) {
-        HStack {
-          ForEach(training.uniqueMuscleGroups) { muscleGroup in
-            Text(muscleGroup.name)
-              .padding(EdgeInsets())
-              .background(muscleGroup.getColor())
-              .cornerRadius(3.0)
-          }
-          
-        }
+        MuscleGroupRow(muscleGroups: training.uniqueMuscleGroups)
         Text(training.name).font(.title)
         if (training.Exercises.count == 1) {
           Text("One Exercise")

@@ -8,11 +8,22 @@
 import SwiftUI
 
 struct ActiveTrainingView: View {
-    var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+  
+  @Bindable var training: Training
+  
+  @Environment(\.dismiss) var dismiss
+  
+  var body: some View {
+    Text("Hello, World!")
+    Button {
+      dismiss()
+    } label: {
+      Text("Close")
     }
+  }
 }
 
 #Preview {
-    ActiveTrainingView()
+  ActiveTrainingView(training: Training())
+    .modelContainer(for: Training.self, inMemory: true)
 }
