@@ -7,9 +7,12 @@
 
 import SwiftUI
 
-struct SetRow: View {
+struct ActiveSetRow: View {
   
-  @Binding var set: SavedSet
+  @Bindable var training: Training
+  @Binding var activeExercise: Int
+  @Binding var weight: Int
+  @Binding var repetitions: Int
   
   @State var isEditing = false
   @State var isNumberPickerWheelActiveWeight = false
@@ -18,52 +21,49 @@ struct SetRow: View {
     var body: some View {
       
       HStack {
-        if set.weight != nil {
+        if training.Exercises[activeExercise].weight != nil {
           HStack {
             Button {
               isNumberPickerWheelActiveWeight.toggle()
             } label: {
-              Text(String(set.weight!))
+              Text(String(weight))
             }
-            .disabled(isEditing)
+            .frame(minWidth: 43)
             .buttonStyle(.bordered)
             Text("kg")
           }
+          .fixedSize()
+          .onAppear(perform: {
+            weight = training.Exercises[activeExercise].weight!
+          })
         }
-        if set.repetitions != nil {
+        if training.Exercises[activeExercise].repetitions != nil {
           HStack {
             Button {
               isNumberPickerWheelActiveRepetitions.toggle()
             } label: {
-              Text(String(set.repetitions!))
+              Text(String(repetitions))
             }
-            .disabled(isEditing)
+            .frame(minWidth: 43)
             .buttonStyle(.bordered)
             Image(systemName: "arrow.clockwise")
           }
-        }
-        Spacer()
-        Button {
-          isEditing.toggle()
-        } label: {
-          Label("Edit", systemImage: "pencil")
+          .fixedSize()
+          .onAppear(perform: {
+            repetitions = training.Exercises[activeExercise].repetitions!
+          })
         }
       }
       .popover(isPresented: $isNumberPickerWheelActiveWeight, content: {
-        NumberPickerWheel(number: Binding(
-                get: { set.weight ?? 0 },
-                set: { newValue in set.weight = newValue }
-              )).presentationDetents([.medium])
+        NumberPickerWheel(number: $weight).presentationDetents([.medium])
       })
       .popover(isPresented: $isNumberPickerWheelActiveRepetitions, content: {
-        NumberPickerWheel(number: Binding(
-                get: { set.repetitions ?? 0 },
-                set: { newValue in set.repetitions = newValue }
-              )).presentationDetents([.medium])
+        NumberPickerWheel(number: $repetitions).presentationDetents([.medium])
       })
     }
 }
 
 #Preview {
-  SetRow(set: .constant(SavedSet(weight: 35, repetitions: 11, sets: 3, setPause: 2, setTime: 3)))
+  ContentView()
+    .modelContainer(for: Training.self, inMemory: true)
 }

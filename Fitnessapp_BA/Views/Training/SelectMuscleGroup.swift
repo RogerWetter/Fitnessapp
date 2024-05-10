@@ -23,6 +23,7 @@ struct SelectMuscleGroup: View {
   let muscleGroupColors: [MuscleGroupColor] = MuscleGroupColor.allCases
   var body: some View {
     NavigationView {
+      VStack {
       List {
         ForEach(allMuscleGroups) { muscleGroup in
           HStack {
@@ -42,27 +43,28 @@ struct SelectMuscleGroup: View {
             }
           }
         }
-        if(isCreateMuscleGroup) {
-          HStack {
-            TextField("New Muscle Group", text: $newMuscleGroupName)
-            Picker("Select the Color for the MuscleGroup", selection: $newMuscleGroupColor) {
-              ForEach(muscleGroupColors, id: \.self) {
-                Text($0.rawValue)
-              }
-            }
-            Button("Create", systemImage: "plus") {
-              modelContext.insert(MuscleGroup(name: newMuscleGroupName, color: newMuscleGroupColor.rawValue))
-              newMuscleGroupName = ""
-              newMuscleGroupColor = MuscleGroupColor.green
-              isCreateMuscleGroup.toggle()
+      }
+      if(isCreateMuscleGroup) {
+        HStack {
+          TextField("New Muscle Group", text: $newMuscleGroupName)
+          Picker("Select the Color for the MuscleGroup", selection: $newMuscleGroupColor) {
+            ForEach(muscleGroupColors, id: \.self) {
+              Text($0.rawValue)
             }
           }
-        } else {
-          Button(action: createMuscleGroup, label: {
-            Label("create new Muscle Group", systemImage: "plus")
-          })
+          Button("Create", systemImage: "plus") {
+            modelContext.insert(MuscleGroup(name: newMuscleGroupName, color: newMuscleGroupColor.rawValue))
+            newMuscleGroupName = ""
+            newMuscleGroupColor = MuscleGroupColor.green
+            isCreateMuscleGroup.toggle()
+          }
         }
+      } else {
+        Button(action: createMuscleGroup, label: {
+          Label("create new Muscle Group", systemImage: "plus")
+        })
       }
+    }
       .padding()
       .navigationTitle("Select Muscle Group")
       .navigationBarTitleDisplayMode(.inline)

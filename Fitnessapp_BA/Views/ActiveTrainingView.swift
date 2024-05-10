@@ -61,60 +61,33 @@ struct ActiveTrainingView: View {
             
           }
           if let image = training.Exercises[activeExercise].image {
-            GeometryReader { geometry in
+//            GeometryReader { geometry in
+//              Image(uiImage: UIImage(data: image)!)
+//                .resizable()
+//                .cornerRadius(30)
+//                .frame(width: geometry.size.width, height: geometry.size.width, alignment: .center)
+//                .clipped()
+//            }
+//            .scaledToFit()
+            HStack {
+              Spacer()
               Image(uiImage: UIImage(data: image)!)
                 .resizable()
                 .cornerRadius(30)
-                .frame(width: geometry.size.width, height: geometry.size.width, alignment: .center)
+                .frame(width: 200, height: 200, alignment: .center)
                 .clipped()
+              Spacer()
             }
-            .scaledToFit()
           } else {
             Spacer()
           }
           
-          ForEach(sets) { set in
-            HStack {
-              if let weight = set.weight {
-                HStack {
-                  Text(String(weight))
-                  Text("kg")
-                }
-              }
-              if let repetitions = set.repetitions {
-                HStack {
-                  Text(String(repetitions))
-                  Image(systemName: "arrow.clockwise")
-                }
-              }
-              Spacer()
-              Button {
-                
-              } label: {
-                Label("Edit", systemImage: "pencil")
-              }
-            }
+          ForEach($sets) { set in
+            SetRow(set: set)
           }
           
           HStack {
-            if training.Exercises[activeExercise].weight != nil {
-              HStack {
-                Text(String(weight))
-                Text("kg")
-              }
-              .onAppear(perform: {
-                weight = training.Exercises[activeExercise].weight!
-              })
-            }
-            if training.Exercises[activeExercise].repetitions != nil {
-              HStack {
-                Text(String(repetitions))
-                Image(systemName: "arrow.clockwise")
-              }
-              .onAppear(perform: {
-                repetitions = training.Exercises[activeExercise].repetitions!
-              })
-            }
+            ActiveSetRow(training: training, activeExercise: $activeExercise, weight: $weight, repetitions: $repetitions)
             Spacer()
             if isSetActive {
               Button {
@@ -141,11 +114,8 @@ struct ActiveTrainingView: View {
             Label("Exercise completed", systemImage: "checkmark")
               .frame(maxWidth: .infinity)
           }
-          .buttonStyle(.bordered)
+          .tagStyle(savedExercises.first(where: { $0.exercise == training.Exercises[activeExercise] })?.completed != nil ? savedExercises.first(where: { $0.exercise == training.Exercises[activeExercise] })!.completed ? TagButtonStyle.prominent : TagButtonStyle.bordered : TagButtonStyle.bordered)
         }
-        .padding()
-        .background(Color(.secondarySystemBackground))
-        .cornerRadius(10)
         
         Text("\(activeExercise + 1)/\(training.Exercises.count)")
           .padding(EdgeInsets(top: 5, leading: 0, bottom: 15, trailing: 0))

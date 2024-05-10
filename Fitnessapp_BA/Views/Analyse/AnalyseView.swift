@@ -8,11 +8,14 @@
 import SwiftUI
 
 struct AnalyseView: View {
-    var body: some View {
-        Text("Analyse View")
-    }
+  @State var testNumber: Int = 5
+  var body: some View {
+    Text("Analyse View")
+    Text("Test Number: \(testNumber)")
+    NumberPickerWheel(number: $testNumber)
+  }
 }
 
 #Preview {
-    AnalyseView()
+  AnalyseView()
 }
