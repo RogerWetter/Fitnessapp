@@ -31,6 +31,7 @@ struct TrainingView: View {
         ExerciseRow(exercise: exercise)
       }
       .onDelete(perform: deleteExercise)
+      .onLongPressGesture(perform: openOptionsForExerciseEdit)
       Section {
         Button(action: addExercise) {
           Label("Add Exercise", systemImage: "plus")
@@ -55,6 +56,12 @@ struct TrainingView: View {
     }
     .fullScreenCover(isPresented: $isShowingActiveTrainingView) {
       ActiveTrainingView(training: training)
+    }
+  }
+  
+  private func openOptionsForExerciseEdit() {
+    withAnimation {
+      isShowingAddExerciseView.toggle()
     }
   }
   

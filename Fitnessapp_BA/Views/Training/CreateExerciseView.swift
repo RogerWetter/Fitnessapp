@@ -12,6 +12,8 @@ import PhotosUI
 struct CreateExerciseView: View {
   @Environment(\.modelContext) private var modelContext
   
+  var exercisesToAdd: Binding<[Exercise]>?
+  
   @State var name: String = ""
   @State var device: String = ""
   @State var muscleGroups: [MuscleGroup] = []
@@ -153,10 +155,13 @@ struct CreateExerciseView: View {
       image: imageData
     )
     modelContext.insert(newExercise)
+    if exercisesToAdd != nil {
+      exercisesToAdd!.wrappedValue.append(newExercise)
+    }
     dismiss()
   }
 }
 
 #Preview {
-  CreateExerciseView()
+  AddExerciseView(training: Training(name: "Test"))
 }

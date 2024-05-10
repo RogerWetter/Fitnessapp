@@ -15,11 +15,11 @@ struct ExerciseRow: View {
     HStack(alignment: .center) {
       VStack(alignment: .leading) {
         HStack {
-          MuscleGroupRow(muscleGroups: exercise.muscleGroups)
           if let device = exercise.device {
             Text(device)
               .font(.caption)
           }
+          MuscleGroupRow(muscleGroups: exercise.muscleGroups)
         }
         Text(exercise.name).font(.title)
         HStack {
@@ -60,6 +60,6 @@ struct ExerciseRow: View {
 }
 
 #Preview {
-  ExerciseRow(exercise: Exercise(name: "Brustpresse", device: "E10", weight: 70, repetitions: 10, setPause: 3, setTime: 3, image: UIImage(named: "Brustzug")?.pngData()))
+  ExerciseRow(exercise: Exercise(name: "Brustpresse", device: "E10", weight: 70, muscleGroup: [], repetitions: 10, setPause: 3, setTime: 3, image: UIImage(named: "Brustzug")?.pngData()))
     .modelContainer(for: Exercise.self, inMemory: true)
 }

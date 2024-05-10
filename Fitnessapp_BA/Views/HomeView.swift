@@ -18,7 +18,7 @@ struct HomeView: View {
   
   @State var searchingText = ""
   
-  var filteredExercises: [Training] {
+  var filteredTrainings: [Training] {
     guard !searchingText.isEmpty else { return trainings }
     
     return trainings.filter { training in
@@ -27,10 +27,10 @@ struct HomeView: View {
   }
   
   var body: some View {
-    NavigationSplitView {
-      HStack {
+    List {
+      Section(header:
+                HStack {
         Text("Trainings")
-          .font(.headline)
         Spacer()
         NavigationLink {
           AllExercisesView()
@@ -38,51 +38,45 @@ struct HomeView: View {
           Label("All Exercises", systemImage: "figure.strengthtraining.traditional")
             .labelStyle(.titleOnly)
         }
-      }
-      .padding(/*@START_MENU_TOKEN@*/.horizontal/*@END_MENU_TOKEN@*/)
-      List {
-        Section {
-          ForEach(trainings) { training in
-            HStack {
-              NavigationLink {
-                TrainingView(training: training)
-              } label: {
-                TrainingRow(training: training)
-              }
-              Button(action: startTraining) {
-                Label("Start Training", systemImage: "play.circle.fill").font(.title).foregroundStyle(.accent)
-              }
-              .labelStyle(.iconOnly)
+      }) {
+        ForEach(filteredTrainings) { training in
+          HStack {
+            NavigationLink {
+              TrainingView(training: training)
+            } label: {
+              TrainingRow(training: training)
             }
-            .buttonStyle(.plain)
+            Button(action: startTraining) {
+              Label("Start Training", systemImage: "play.circle.fill").font(.title).foregroundStyle(.accent)
+            }
+            .labelStyle(.iconOnly)
           }
-          .onDelete(perform: deleteTraining)
+          .buttonStyle(.plain)
         }
-        
-        Button(action: addTraining) {
-          Label("Add Training", systemImage: "plus")
-        }
+        .onDelete(perform: deleteTraining)
       }
-      .searchable(text: $searchingText)
-      .toolbar {
-        ToolbarItem(placement: .navigationBarTrailing) {
-          Button(action: openSettings) {
-            Label("open Settings", systemImage: "gearshape").foregroundStyle(.gray)
-          }
-        }
+      
+      Button(action: addTraining) {
+        Label("Add Training", systemImage: "plus")
       }
-        .navigationTitle("Home")
-    } detail: {
-      Text("Select a Training")
     }
+    .searchable(text: $searchingText)
+    .toolbar {
+      ToolbarItem(placement: .navigationBarTrailing) {
+        Button(action: openSettings) {
+          Label("open Settings", systemImage: "gearshape").foregroundStyle(.gray)
+        }
+      }
+    }
+    .navigationTitle("Home")
     .sheet(isPresented: $isShowingAddTrainingView) {
       AddTrainingView().presentationDetents([.fraction(0.20)])
     }
     .fullScreenCover(isPresented: $isShowingActiveTrainingView) {
-      ActiveTrainingView(training: trainings[0])// richtiges Training muss noch mitgegeben werden!
+      ActiveTrainingView(training: trainings[0])// Todo: richtiges Training muss noch mitgegeben werden!
     }
-    .fullScreenCover(isPresented: $isShowingSettingsView) {
-      SettingsView()
+    .sheet(isPresented: $isShowingSettingsView) {
+      SettingsView().presentationDetents([.large])
     }
   }
   

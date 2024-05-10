@@ -14,11 +14,29 @@ struct AddExerciseView: View {
   @Query private var exercises: [Exercise]
   @State var searchingText = ""
   
-  var filteredExercises: [Exercise] {
-    guard !searchingText.isEmpty else { return exercises }
-    
+  var filteredExercisesNotInTraining: [Exercise] {
     return exercises.filter { exercise in
+      !training.Exercises.contains(exercise)
+    }
+  }
+  
+  var filteredExercisesSearchbar: [Exercise] {
+    guard !searchingText.isEmpty else { return filteredExercisesNotInTraining }
+    
+    return filteredExercisesNotInTraining.filter { exercise in
       exercise.name.lowercased().contains(searchingText.lowercased())
+    }
+  }
+  
+  var filteredExercisesNotMarked: [Exercise] {
+    return filteredExercisesSearchbar.filter { exercise in
+      !filteredExercisesMarked.contains(exercise)
+    }
+  }
+  
+  var filteredExercisesMarked: [Exercise] {
+    return filteredExercisesSearchbar.filter { exercise in
+      exercisesToAdd.contains(exercise) || training.Exercises.contains(exercise)
     }
   }
   
@@ -38,7 +56,7 @@ struct AddExerciseView: View {
             Label("create Exercise", systemImage: "plus")
           }
           Section {
-            ForEach(filteredExercises) { exercise in
+            ForEach(filteredExercisesMarked) { exercise in
               HStack() {
                 ExerciseRow(exercise: exercise)
                 Spacer()
@@ -51,7 +69,27 @@ struct AddExerciseView: View {
                     exercisesToAdd.append(exercise)
                   }
                 } label: {
-                  Image(systemName: exercisesToAdd.contains(exercise) ? "checkmark.circle" : "plus.circle")
+                  Image(systemName: "checkmark.circle")
+                    .imageScale(.large)
+                }
+              }
+            }
+          }
+          Section {
+            ForEach(filteredExercisesNotMarked) { exercise in
+              HStack() {
+                ExerciseRow(exercise: exercise)
+                Spacer()
+                Button {
+                  if exercisesToAdd.contains(exercise) {
+                    exercisesToAdd.removeAll(where: {
+                      $0 == exercise
+                    })
+                  } else {
+                    exercisesToAdd.append(exercise)
+                  }
+                } label: {
+                  Image(systemName: "plus.circle")
                     .imageScale(.large)
                 }
               }
@@ -77,7 +115,7 @@ struct AddExerciseView: View {
           }
         }
         .sheet(isPresented: $isShowingCreateExerciseView) {
-          CreateExerciseView().presentationDetents([.large])
+          CreateExerciseView(exercisesToAdd: $exercisesToAdd).presentationDetents([.large])
         }
     }
   }

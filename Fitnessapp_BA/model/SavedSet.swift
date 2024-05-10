@@ -9,19 +9,6 @@ import Foundation
 import SwiftData
 
 @Model
-final class SavedExercise {
-  var timeStamp: Date
-  var exercise: Exercise
-  var sets: [SavedSet]
-
-  init(exercise: Exercise, sets: [SavedSet]) {
-    self.timeStamp = Date()
-    self.exercise = exercise
-    self.sets = sets
-  }
-}
-
-@Model
 final class SavedSet {
   var weight: Int?
   var repetitions: Int?

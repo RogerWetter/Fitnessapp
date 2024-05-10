@@ -8,15 +8,13 @@
 import SwiftUI
 
 struct ContentView: View {
+  @State private var path = NavigationPath()
+  
   var body: some View {
     TabView {
       
-      NavigationStack {
+      NavigationStack(path: $path) {
         HomeView()
-          .navigationDestination(for: Training.self) {
-            training in
-            TrainingView(training: training)
-          }
       }
       .tabItem {
         Label(
@@ -24,13 +22,16 @@ struct ContentView: View {
           icon: { Image(systemName: "house.fill") }
         )
       }
-      AnalyseView()
-        .tabItem {
-          Label(
-            title: { Text("Analyse") },
-            icon: { Image(systemName: "chart.bar.fill") }
-          )
-        }
+      
+      NavigationStack {
+        AnalyseView()
+      }
+      .tabItem {
+        Label(
+          title: { Text("Analyse") },
+          icon: { Image(systemName: "chart.bar.fill") }
+        )
+      }
     }
   }
 }

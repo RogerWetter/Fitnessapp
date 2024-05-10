@@ -8,45 +8,63 @@
 import SwiftUI
 import SwiftData
 
-struct SettingsTrainings: View {
+struct SettingsExercises: View {
   
   @Environment(\.modelContext) private var modelContext
-  @Query private var trainings: [Training]
-  
+  @Query private var exercises: [Exercise]
   @State var searchingText = ""
-  var filteredTrainings: [Training] {
-    guard !searchingText.isEmpty else { return trainings }
+  
+  var filteredExercises: [Exercise] {
+    guard !searchingText.isEmpty else { return exercises }
     
-    return trainings.filter { training in
-      training.name.lowercased().contains(searchingText.lowercased())
+    return exercises.filter { exercise in
+      let exerciseNameContains = exercise.name.lowercased().contains(searchingText.lowercased())
+      let muscleGroupContains = exercise.muscleGroups.contains { muscleGroup in
+        muscleGroup.name.lowercased().contains(searchingText.lowercased())
+      }
+      return exerciseNameContains || muscleGroupContains
     }
   }
   
+  @State private var isShowingCreateExerciseView = false
+  
   var body: some View {
-      List {
-        ForEach(filteredTrainings) { training in
-          Text(training.name)
-        }
-        .onDelete(perform: deleteMuscleGroup)
+    List {
+      Button(action: createExercise) {
+        Label("create Exercise", systemImage: "plus")
       }
-      .searchable(text: $searchingText)
-      .navigationTitle("Muscle Groups")
-      .toolbar {
-        ToolbarItem(placement: .navigationBarTrailing) {
-          EditButton()
+      Section {
+        ForEach(filteredExercises) { exercise in
+          ExerciseRow(exercise: exercise)
         }
+        .onDelete(perform: deleteExercise)
       }
+    }
+    .searchable(text: $searchingText)
+    .navigationTitle("Exercises")
+    .toolbar {
+      ToolbarItem(placement: .navigationBarTrailing) {
+        EditButton()
+      }
+    }
+    .sheet(isPresented: $isShowingCreateExerciseView) {
+      CreateExerciseView().presentationDetents([.large])
+    }
   }
   
-  private func deleteMuscleGroup(offsets: IndexSet) {
+  private func createExercise() {
+    isShowingCreateExerciseView.toggle()
+  }
+  
+  private func deleteExercise(offsets: IndexSet) {
     withAnimation {
       for index in offsets {
-        modelContext.delete(filteredTrainings[index])
+        modelContext.delete(filteredExercises[index])
       }
     }
   }
 }
 
 #Preview {
-  SettingsMuscleGroups()
+  SettingsExercises()
 }

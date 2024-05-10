@@ -16,17 +16,43 @@ struct SettingsView: View {
         List {
           Section(header: Text("My Data")) {
             NavigationLink {
-              NavigationView {
-                List {
-                }
-              }
+              SettingsTrainings()
             } label: {
-              Text("All Muscle Groups")
+              Text("Trainings")
+            }
+            NavigationLink {
+              SettingsExercises()
+            } label: {
+              Text("Exercises")
+            }
+            NavigationLink {
+              SettingsMuscleGroups()
+            } label: {
+              Text("Muscle Groups")
+            }
+          }
+          Section(header: Text("My History")) {
+            NavigationLink {
+              SettingsSavedExercises()
+            } label: {
+              Text("Saved Exercises")
             }
           }
         }
         .navigationTitle("Settings")
+        .toolbar {
+          ToolbarItem(placement: .navigationBarTrailing) {
+            Button(action: dismissAction) {
+              Text("Done")
+                .fontWeight(.semibold)
+            }
+          }
+        }
     }
+  }
+  
+  private func dismissAction() {
+    dismiss()
   }
 }
 

@@ -52,7 +52,7 @@ final class MuscleGroup {
   }
 }
 
-enum MuscleGroupColor: String {
+enum MuscleGroupColor: String, CaseIterable {
   case red = "red"
   case green = "green"
   case blue = "blue"

@@ -8,6 +8,13 @@
 
 /* Begin PBXBuildFile section */
 		DB7B2A2D2BE930B600AB7BF3 /* AllExercisesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB7B2A2C2BE930B600AB7BF3 /* AllExercisesView.swift */; };
+		DB7B2A2F2BEB878A00AB7BF3 /* SelectMuscleGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB7B2A2E2BEB878A00AB7BF3 /* SelectMuscleGroup.swift */; };
+		DB7B2A342BEBC3C400AB7BF3 /* SettingsMuscleGroups.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB7B2A332BEBC3C400AB7BF3 /* SettingsMuscleGroups.swift */; };
+		DB7B2A362BEBD07800AB7BF3 /* SettingsTrainings.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB7B2A352BEBD07800AB7BF3 /* SettingsTrainings.swift */; };
+		DB7B2A382BEBD19100AB7BF3 /* SettingsExercises.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB7B2A372BEBD19100AB7BF3 /* SettingsExercises.swift */; };
+		DB7B2A3D2BECC2F700AB7BF3 /* SavedExercise.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB7B2A3C2BECC2F700AB7BF3 /* SavedExercise.swift */; };
+		DB7B2A3F2BECD11700AB7BF3 /* SavedSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB7B2A3E2BECD11700AB7BF3 /* SavedSet.swift */; };
+		DB7B2A412BECF63100AB7BF3 /* SettingsSavedExercises.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB7B2A402BECF63100AB7BF3 /* SettingsSavedExercises.swift */; };
 		DB94AAC62BE278AA00E80D37 /* AddTrainingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB94AAC52BE278AA00E80D37 /* AddTrainingView.swift */; };
 		DB94AAC82BE28FFB00E80D37 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB94AAC72BE28FFB00E80D37 /* HomeView.swift */; };
 		DB94AACA2BE371A500E80D37 /* AddExerciseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB94AAC92BE371A500E80D37 /* AddExerciseView.swift */; };
@@ -52,6 +59,13 @@
 
 /* Begin PBXFileReference section */
 		DB7B2A2C2BE930B600AB7BF3 /* AllExercisesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllExercisesView.swift; sourceTree = "<group>"; };
+		DB7B2A2E2BEB878A00AB7BF3 /* SelectMuscleGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectMuscleGroup.swift; sourceTree = "<group>"; };
+		DB7B2A332BEBC3C400AB7BF3 /* SettingsMuscleGroups.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsMuscleGroups.swift; sourceTree = "<group>"; };
+		DB7B2A352BEBD07800AB7BF3 /* SettingsTrainings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsTrainings.swift; sourceTree = "<group>"; };
+		DB7B2A372BEBD19100AB7BF3 /* SettingsExercises.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsExercises.swift; sourceTree = "<group>"; };
+		DB7B2A3C2BECC2F700AB7BF3 /* SavedExercise.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SavedExercise.swift; sourceTree = "<group>"; };
+		DB7B2A3E2BECD11700AB7BF3 /* SavedSet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SavedSet.swift; sourceTree = "<group>"; };
+		DB7B2A402BECF63100AB7BF3 /* SettingsSavedExercises.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsSavedExercises.swift; sourceTree = "<group>"; };
 		DB94AAC52BE278AA00E80D37 /* AddTrainingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTrainingView.swift; sourceTree = "<group>"; };
 		DB94AAC72BE28FFB00E80D37 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		DB94AAC92BE371A500E80D37 /* AddExerciseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddExerciseView.swift; sourceTree = "<group>"; };
@@ -106,23 +120,60 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		DB94AACD2BE3933000E80D37 /* Views */ = {
+		DB7B2A302BEBC2A700AB7BF3 /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				DB94AAD02BE39AF100E80D37 /* SettingsView.swift */,
+				DB7B2A332BEBC3C400AB7BF3 /* SettingsMuscleGroups.swift */,
+				DB7B2A372BEBD19100AB7BF3 /* SettingsExercises.swift */,
+				DB7B2A402BECF63100AB7BF3 /* SettingsSavedExercises.swift */,
+				DB7B2A352BEBD07800AB7BF3 /* SettingsTrainings.swift */,
+			);
+			path = Settings;
+			sourceTree = "<group>";
+		};
+		DB7B2A312BEBC2E800AB7BF3 /* Analyse */ = {
+			isa = PBXGroup;
+			children = (
+				DB94AACB2BE3746500E80D37 /* AnalyseView.swift */,
+			);
+			path = Analyse;
+			sourceTree = "<group>";
+		};
+		DB7B2A392BEBD57A00AB7BF3 /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				DBC414AA2BE004DC00E0F1FE /* TrainingRow.swift */,
+				DBC414AC2BE158A900E0F1FE /* ExerciseRow.swift */,
+				DB94AACE2BE393DE00E80D37 /* MuscleGroupRow.swift */,
+				DB94AADA2BE3F2A100E80D37 /* ImagePicker.swift */,
+				DB94AADC2BE40FCE00E80D37 /* CameraPickerView.swift */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
+		DB7B2A3B2BEBD64B00AB7BF3 /* Training */ = {
 			isa = PBXGroup;
 			children = (
 				DBC414A82BDFF4EE00E0F1FE /* TrainingView.swift */,
-				DBC414AA2BE004DC00E0F1FE /* TrainingRow.swift */,
-				DBC414AC2BE158A900E0F1FE /* ExerciseRow.swift */,
 				DB94AAC52BE278AA00E80D37 /* AddTrainingView.swift */,
-				DB94AAC72BE28FFB00E80D37 /* HomeView.swift */,
 				DB94AAC92BE371A500E80D37 /* AddExerciseView.swift */,
-				DB94AACB2BE3746500E80D37 /* AnalyseView.swift */,
-				DB94AACE2BE393DE00E80D37 /* MuscleGroupRow.swift */,
-				DB94AAD02BE39AF100E80D37 /* SettingsView.swift */,
-				DB94AAD22BE39C4300E80D37 /* ActiveTrainingView.swift */,
 				DB94AAD62BE3E6EB00E80D37 /* CreateExerciseView.swift */,
-				DB94AADA2BE3F2A100E80D37 /* ImagePicker.swift */,
-				DB94AADC2BE40FCE00E80D37 /* CameraPickerView.swift */,
+				DB7B2A2E2BEB878A00AB7BF3 /* SelectMuscleGroup.swift */,
 				DB7B2A2C2BE930B600AB7BF3 /* AllExercisesView.swift */,
+			);
+			path = Training;
+			sourceTree = "<group>";
+		};
+		DB94AACD2BE3933000E80D37 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				DB7B2A3B2BEBD64B00AB7BF3 /* Training */,
+				DB7B2A392BEBD57A00AB7BF3 /* Components */,
+				DB7B2A312BEBC2E800AB7BF3 /* Analyse */,
+				DB7B2A302BEBC2A700AB7BF3 /* Settings */,
+				DB94AAC72BE28FFB00E80D37 /* HomeView.swift */,
+				DB94AAD22BE39C4300E80D37 /* ActiveTrainingView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -191,6 +242,8 @@
 			children = (
 				DBC4147B2BDF790300E0F1FE /* Training.swift */,
 				DBC414A42BDFD32200E0F1FE /* Exercise.swift */,
+				DB7B2A3C2BECC2F700AB7BF3 /* SavedExercise.swift */,
+				DB7B2A3E2BECD11700AB7BF3 /* SavedSet.swift */,
 				DBC414A62BDFD36000E0F1FE /* MuscleGroup.swift */,
 			);
 			path = model;
@@ -326,23 +379,30 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DB7B2A2F2BEB878A00AB7BF3 /* SelectMuscleGroup.swift in Sources */,
 				DB94AAD32BE39C4300E80D37 /* ActiveTrainingView.swift in Sources */,
+				DB7B2A362BEBD07800AB7BF3 /* SettingsTrainings.swift in Sources */,
 				DB94AACC2BE3746500E80D37 /* AnalyseView.swift in Sources */,
 				DBC4147A2BDF790300E0F1FE /* ContentView.swift in Sources */,
 				DB94AADB2BE3F2A100E80D37 /* ImagePicker.swift in Sources */,
 				DBC414AB2BE004DC00E0F1FE /* TrainingRow.swift in Sources */,
 				DBC414A52BDFD32200E0F1FE /* Exercise.swift in Sources */,
 				DBC4147C2BDF790300E0F1FE /* Training.swift in Sources */,
+				DB7B2A3F2BECD11700AB7BF3 /* SavedSet.swift in Sources */,
+				DB7B2A3D2BECC2F700AB7BF3 /* SavedExercise.swift in Sources */,
 				DB94AACA2BE371A500E80D37 /* AddExerciseView.swift in Sources */,
 				DBC414AD2BE158A900E0F1FE /* ExerciseRow.swift in Sources */,
 				DB94AAD12BE39AF100E80D37 /* SettingsView.swift in Sources */,
+				DB7B2A412BECF63100AB7BF3 /* SettingsSavedExercises.swift in Sources */,
 				DB7B2A2D2BE930B600AB7BF3 /* AllExercisesView.swift in Sources */,
 				DB94AACF2BE393DE00E80D37 /* MuscleGroupRow.swift in Sources */,
+				DB7B2A342BEBC3C400AB7BF3 /* SettingsMuscleGroups.swift in Sources */,
 				DB94AAC82BE28FFB00E80D37 /* HomeView.swift in Sources */,
 				DB94AAD72BE3E6EB00E80D37 /* CreateExerciseView.swift in Sources */,
 				DB94AAC62BE278AA00E80D37 /* AddTrainingView.swift in Sources */,
 				DBC414A72BDFD36000E0F1FE /* MuscleGroup.swift in Sources */,
 				DBC414A92BDFF4EE00E0F1FE /* TrainingView.swift in Sources */,
+				DB7B2A382BEBD19100AB7BF3 /* SettingsExercises.swift in Sources */,
 				DBC414782BDF790300E0F1FE /* Fitnessapp_BAApp.swift in Sources */,
 				DB94AADD2BE40FCE00E80D37 /* CameraPickerView.swift in Sources */,
 			);

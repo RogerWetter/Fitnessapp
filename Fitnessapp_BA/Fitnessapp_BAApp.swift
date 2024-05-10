@@ -14,6 +14,7 @@ struct Fitnessapp_BAApp: App {
         let schema = Schema([
             Training.self,
             Exercise.self,
+            SavedExercise.self,
         ])
         let modelConfiguration = ModelConfiguration(schema: schema, isStoredInMemoryOnly: false)
 
