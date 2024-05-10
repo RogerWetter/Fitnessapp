@@ -1,4 +1,4 @@
-**FitnessApp Bachelorarbeit**
+# FitnessApp Bachelorarbeit
 
 Dieses Repository enthält den Code für die FitnessApp, die im Rahmen meiner Bachelorarbeit entwickelt wurde. Die FitnessApp ist eine Anwendung, die es Benutzern ermöglicht, ihre Trainingsaktivitäten zu verfolgen, Trainingspläne zu erstellen und ihre Fortschritte zu analysieren.
 
