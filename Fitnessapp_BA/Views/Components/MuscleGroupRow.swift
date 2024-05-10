@@ -12,14 +12,16 @@ struct MuscleGroupRow: View {
   let muscleGroups: [MuscleGroup]
   
   var body: some View {
-    HStack {
-      ForEach(muscleGroups) { muscleGroup in
-        Text(muscleGroup.name)
-          .padding(/*@START_MENU_TOKEN@*/.all, 1.0/*@END_MENU_TOKEN@*/)
-          .background(muscleGroup.getColor())
-          .cornerRadius(5.0)
+    ScrollView(.horizontal) {
+      HStack {
+        ForEach(muscleGroups) { muscleGroup in
+          Text(muscleGroup.name)
+            .padding(/*@START_MENU_TOKEN@*/.all, 1.0/*@END_MENU_TOKEN@*/)
+            .background(muscleGroup.getColor())
+            .cornerRadius(5.0)
+        }
+        
       }
-      
     }
   }
 }

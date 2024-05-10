@@ -18,7 +18,11 @@ struct AllExercisesView: View {
     guard !searchingText.isEmpty else { return exercises }
     
     return exercises.filter { exercise in
-      exercise.name.lowercased().contains(searchingText.lowercased())
+      let exerciseNameContains = exercise.name.lowercased().contains(searchingText.lowercased())
+      let muscleGroupContains = exercise.muscleGroups.contains { muscleGroup in
+        muscleGroup.name.lowercased().contains(searchingText.lowercased())
+      }
+      return exerciseNameContains || muscleGroupContains
     }
   }
   
@@ -33,12 +37,15 @@ struct AllExercisesView: View {
         ForEach(filteredExercises) { exercise in
           ExerciseRow(exercise: exercise)
         }
+        .onDelete(perform: deleteExercise)
       }
     }
     .searchable(text: $searchingText)
     .navigationTitle("All Exercises")
     .toolbar {
-      
+      ToolbarItem(placement: .navigationBarTrailing) {
+        EditButton()
+      }
     }
     .sheet(isPresented: $isShowingCreateExerciseView) {
       CreateExerciseView().presentationDetents([.large])
@@ -47,6 +54,14 @@ struct AllExercisesView: View {
   
   private func createExercise() {
     isShowingCreateExerciseView.toggle()
+  }
+  
+  private func deleteExercise(offsets: IndexSet) {
+    withAnimation {
+      for index in offsets {
+        modelContext.delete(filteredExercises[index])
+      }
+    }
   }
 }
 

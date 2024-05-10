@@ -28,13 +28,7 @@ struct TrainingView: View {
   var body: some View {
     List {
       ForEach(filteredExercises) { exercise in
-        NavigationLink {
-          ActiveTrainingView(training: training)
-          
-        } label: {
-          ExerciseRow(exercise: exercise)
-          
-        }
+        ExerciseRow(exercise: exercise)
       }
       .onDelete(perform: deleteExercise)
       Section {

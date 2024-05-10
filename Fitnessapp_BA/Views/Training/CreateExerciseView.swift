@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import SwiftData
 import PhotosUI
 
 struct CreateExerciseView: View {
@@ -28,6 +29,7 @@ struct CreateExerciseView: View {
   
   @State private var isShowingPhotosPicker = false
   @State private var isShowingCamera = false
+  @State private var isShowingSelectMuscleGroup = false
   
   enum FocusField: Hashable {
     case field
@@ -48,11 +50,11 @@ struct CreateExerciseView: View {
           } label: {
             Label("Choose Photo", systemImage: "photo.on.rectangle")
           }
-//          Button {
-//            
-//          } label: {
-//            Label("Choose File", systemImage: "folder")
-//          }
+          //          Button {
+          //
+          //          } label: {
+          //            Label("Choose File", systemImage: "folder")
+          //          }
         } label: {
           Image(systemName: "camera.circle.fill")
             .resizable()
@@ -60,15 +62,15 @@ struct CreateExerciseView: View {
         }
         .frame(width: 200, height: 200)
         .background(
-            Group {
-                if let loadedImage = image {
-                    loadedImage
-                        .resizable()
-                        .frame(maxWidth: .infinity, maxHeight: .infinity)
-                } else {
-                  Color.secondary
-                }
+          Group {
+            if let loadedImage = image {
+              loadedImage
+                .resizable()
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
+            } else {
+              Color.secondary
             }
+          }
         )
         .cornerRadius(20)
         TextField("Exercise Name", text: $name)
@@ -81,7 +83,12 @@ struct CreateExerciseView: View {
             self.focusedField = .field
           }
         TextField("Device", text: $device)
-          .textFieldStyle(.roundedBorder)
+        HStack {
+          MuscleGroupRow(muscleGroups: muscleGroups)
+          Button("Select Muscle Groups", systemImage: "plus") {
+            isShowingSelectMuscleGroup.toggle()
+          }
+        }
         Stepper("\(weight) kg", value: $weight, in: 0...200, step: 5)
         Stepper("\(Image(systemName: "arrow.clockwise")) \(repetitions) x", value: $repetitions, in: 0...50)
         Stepper("\(Image(systemName: "arrow.triangle.2.circlepath")) \(sets) x", value: $sets, in: 0...10)
@@ -92,23 +99,23 @@ struct CreateExerciseView: View {
         }
       }
       .padding()
-        .navigationTitle("New Training")
-        .navigationBarTitleDisplayMode(.inline)
-        .toolbar {
-          ToolbarItemGroup(placement: .navigationBarLeading) {
-            Button(action: dismissAction) {
-              Text("Cancel")
-            }
-            .foregroundColor(.red)
+      .navigationTitle("New Training")
+      .navigationBarTitleDisplayMode(.inline)
+      .toolbar {
+        ToolbarItemGroup(placement: .navigationBarLeading) {
+          Button(action: dismissAction) {
+            Text("Cancel")
           }
-          ToolbarItemGroup(placement: .navigationBarTrailing) {
-            Button(action: createTraining) {
-              Text("Create")
-                .fontWeight(name.isEmpty ? .regular : .semibold)
-            }
-            .disabled(name.isEmpty)
-          }
+          .foregroundColor(.red)
         }
+        ToolbarItemGroup(placement: .navigationBarTrailing) {
+          Button(action: createTraining) {
+            Text("Create")
+              .fontWeight(name.isEmpty ? .regular : .semibold)
+          }
+          .disabled(name.isEmpty)
+        }
+      }
     }
     .photosPicker(isPresented: $isShowingPhotosPicker, selection: $selectedPhoto, matching: .images)
     .task(id: selectedPhoto) {
@@ -126,6 +133,9 @@ struct CreateExerciseView: View {
         self.image = Image(uiImage: uiImage)
       }
     }
+    .sheet(isPresented: $isShowingSelectMuscleGroup) {
+      SelectMuscleGroup(muscleGroups: $muscleGroups).presentationDetents([.medium, .large])
+    }
   }
   
   private func dismissAction() {
@@ -133,12 +143,20 @@ struct CreateExerciseView: View {
   }
   
   private func createTraining() {
-    let newExercise = Exercise(name: name, device: device, weight: weight, setPause: setPause, setTime: setTime, image: imageData)
+    let newExercise = Exercise(
+      name: name,
+      device: device.isEmpty ? nil : device,
+      weight: weight == 0 ? nil : weight,
+      muscleGroup: muscleGroups,
+      setPause: setPause == 0 ? nil : setPause,
+      setTime: setTime == 0 ? nil : setTime,
+      image: imageData
+    )
     modelContext.insert(newExercise)
     dismiss()
   }
 }
 
 #Preview {
-    CreateExerciseView()
+  CreateExerciseView()
 }
