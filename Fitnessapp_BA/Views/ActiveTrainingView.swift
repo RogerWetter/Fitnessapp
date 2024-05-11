@@ -78,10 +78,11 @@ struct ActiveTrainingView: View {
                 .clipped()
               Spacer()
             }
+            .padding()
           } else {
             Spacer()
           }
-          
+          Spacer()
           ForEach($sets) { set in
             SetRow(set: set)
           }
