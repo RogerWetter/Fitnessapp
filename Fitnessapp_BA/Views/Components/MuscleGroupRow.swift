@@ -20,9 +20,9 @@ struct MuscleGroupRow: View {
             .background(muscleGroup.getColor())
             .cornerRadius(5.0)
         }
-        
       }
     }
+    .scrollBounceBehavior(.basedOnSize, axes: [.horizontal])
   }
 }
 

@@ -40,3 +40,8 @@ struct ContentView: View {
   ContentView()
     .modelContainer(for: Training.self, inMemory: true)
 }
+#Preview("Deutsch") {
+  ContentView()
+    .modelContainer(for: Training.self, inMemory: true)
+    .environment(\.locale, Locale(identifier: "DE"))
+}

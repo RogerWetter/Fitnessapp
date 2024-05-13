@@ -40,7 +40,7 @@ struct CreateExerciseView: View {
   
   var body: some View {
     NavigationView {
-      VStack {
+      ScrollView {
         Menu {
           Button {
             isShowingCamera.toggle()
@@ -61,6 +61,8 @@ struct CreateExerciseView: View {
           Image(systemName: "camera.circle.fill")
             .resizable()
             .scaleEffect(0.3, anchor: .center)
+            .symbolRenderingMode(.palette)
+            .foregroundStyle(.white, .primary)
         }
         .frame(width: 200, height: 200)
         .background(
@@ -76,7 +78,7 @@ struct CreateExerciseView: View {
         )
         .cornerRadius(20)
         TextField("Exercise Name", text: $name)
-          .font(.title2)
+          .font(.title)
           .multilineTextAlignment(.center)
           .textFieldStyle(.plain)
           .padding()
@@ -85,19 +87,58 @@ struct CreateExerciseView: View {
             self.focusedField = .field
           }
         TextField("Device", text: $device)
+          .font(.title2)
+          .padding(.all, 8.0)
+          .overlay(RoundedRectangle(cornerRadius: 15).stroke(Color(.systemGray4), lineWidth: 2))
         HStack {
           MuscleGroupRow(muscleGroups: muscleGroups)
-          Button("Select Muscle Groups", systemImage: "plus") {
+            .scaledToFit()
+          Button {
             isShowingSelectMuscleGroup.toggle()
+          } label: {
+            if muscleGroups.isEmpty {
+              Label("Select Muscle Groups", systemImage: "plus")
+            } else {
+              Label("Select Muscle Groups", systemImage: "plus")
+                .labelStyle(.iconOnly)
+            }
           }
         }
-        Stepper("\(weight) kg", value: $weight, in: 0...200, step: 5)
-        Stepper("\(Image(systemName: "arrow.clockwise")) \(repetitions) x", value: $repetitions, in: 0...50)
-        Stepper("\(Image(systemName: "arrow.triangle.2.circlepath")) \(sets) x", value: $sets, in: 0...10)
-        Stepper("\(Image(systemName: "clock.arrow.2.circlepath")) \(setPause) '", value: $setPause, in: 0...5)
+        .padding(.vertical)
         HStack {
-          Image(systemName: "pause")
-          Stepper("\(setTime) '", value: $setTime, in: 0...59)
+          Text("weight:")
+          Spacer()
+          EditNumberButton(number: $weight)
+          Text("kg")
+            .frame(width: 30)
+        }
+        HStack {
+          Text("\(Image(systemName: "arrow.clockwise")) Repetitions:")
+          Spacer()
+          EditNumberButton(number: $repetitions)
+          Text("x")
+            .frame(width: 30)
+        }
+        HStack {
+          Text("\(Image(systemName: "arrow.triangle.2.circlepath")) Sets:")
+          Spacer()
+          EditNumberButton(number: $sets)
+          Text("x")
+            .frame(width: 30)
+        }
+        HStack {
+          Text("\(Image(systemName: "clock.arrow.2.circlepath")) Set Pause:")
+          Spacer()
+          EditNumberButton(number: $setPause)
+          Text("min")
+            .frame(width: 30)
+        }
+        HStack {
+          Text("\(Image(systemName: "clock.arrow.2.circlepath")) Set Time:")
+          Spacer()
+          EditNumberButton(number: $setTime)
+          Text("min")
+            .frame(width: 30)
         }
       }
       .padding()

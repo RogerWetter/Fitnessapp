@@ -206,7 +206,7 @@ struct ActiveTrainingView: View {
             Button {
               stopTraining()
             } label: {
-              Label("Training beenden", systemImage: "stop.fill")
+              Label("Stop Training", systemImage: "stop.fill")
             }
           }
         }

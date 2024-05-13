@@ -56,6 +56,8 @@ struct HomeView: View {
                   Image(systemName: "play.circle.fill")
                     .resizable()
                     .frame(width: 50, height: 50)
+                    .symbolRenderingMode(.palette)
+                    .foregroundStyle(.white, .primary)
                 }.foregroundStyle(.accent)
               }
               .labelStyle(.iconOnly)
