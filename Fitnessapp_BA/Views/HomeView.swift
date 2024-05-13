@@ -11,9 +11,9 @@ import SwiftData
 struct HomeView: View {
   @Environment(\.modelContext) private var modelContext
   @Query private var trainings: [Training]
-  @State private var isShowingActiveTrainingView = false
   @State private var isShowingSettingsView = false
   @State private var isShowingAddTrainingView = false
+  @State private var selectedTraining: Training?
   
   
   @State var searchingText = ""
@@ -41,15 +41,25 @@ struct HomeView: View {
       }) {
         ForEach(filteredTrainings) { training in
           HStack {
-            NavigationLink {
-              TrainingView(training: training)
-            } label: {
-              TrainingRow(training: training)
+            TrainingRow(training: training)
+              .background(
+                NavigationLink("", destination: TrainingView(training: training))
+                  .opacity(0)
+              )
+            if training.Exercises.count > 0 {
+              Button {
+                startTraining(training: training)
+              } label: {
+                Label{
+                  Text("Start Training")
+                } icon: {
+                  Image(systemName: "play.circle.fill")
+                    .resizable()
+                    .frame(width: 50, height: 50)
+                }.foregroundStyle(.accent)
+              }
+              .labelStyle(.iconOnly)
             }
-            Button(action: startTraining) {
-              Label("Start Training", systemImage: "play.circle.fill").font(.title).foregroundStyle(.accent)
-            }
-            .labelStyle(.iconOnly)
           }
           .buttonStyle(.plain)
         }
@@ -72,8 +82,8 @@ struct HomeView: View {
     .sheet(isPresented: $isShowingAddTrainingView) {
       AddTrainingView().presentationDetents([.fraction(0.20)])
     }
-    .fullScreenCover(isPresented: $isShowingActiveTrainingView) {
-      ActiveTrainingView(training: trainings[0])// Todo: richtiges Training muss noch mitgegeben werden!
+    .fullScreenCover(item: $selectedTraining) { training in
+      ActiveTrainingView(training: training)
     }
     .sheet(isPresented: $isShowingSettingsView) {
       SettingsView().presentationDetents([.large])
@@ -89,13 +99,13 @@ struct HomeView: View {
   private func deleteTraining(offsets: IndexSet) {
     withAnimation {
       for index in offsets {
-        modelContext.delete(trainings[index])
+        modelContext.delete(filteredTrainings[index])
       }
     }
   }
   
-  private func startTraining() {
-    isShowingActiveTrainingView.toggle()
+  private func startTraining(training: Training) {
+    selectedTraining = training
   }
   
   private func openSettings() {

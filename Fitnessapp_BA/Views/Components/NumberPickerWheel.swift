@@ -8,9 +8,11 @@
 import SwiftUI
 
 struct NumberPickerWheel: View {
+  @Environment(\.dismiss) var dismiss
   
   @Binding var number: Int
   
+  @State var numberEdit = 0
   @State var numberTextfield: String = ""
   @State var isShowingWheel = true
   
@@ -25,25 +27,22 @@ struct NumberPickerWheel: View {
   var body: some View {
     
     if isShowingWheel {
-      HStack {
-        Picker("", selection: $number) {
+        Picker("", selection: $numberEdit) {
           ForEach(range, id: \.self) {
             Text(String($0))
           }
         }
+        .onAppear(perform: {
+          numberEdit = number
+        })
         .onTapGesture {
           isShowingWheel.toggle()
         }
         .pickerStyle(.wheel)
-        //        Button {
-        //          isShowingWheel.toggle()
-        //        } label: {
-        //          Label("Edit", systemImage: "pencil")
-        //        }
-      }
     } else {
       HStack {
         TextField("", text: $numberTextfield)
+          .frame(width: 300)
           .keyboardType(.numberPad)
           .font(.title2)
           .multilineTextAlignment(.center)
@@ -51,7 +50,7 @@ struct NumberPickerWheel: View {
           .padding()
           .focused($focusedField, equals: .field)
           .onAppear {
-            numberTextfield = String(number)
+            numberTextfield = String(numberEdit)
             self.focusedField = .field
           }
           .onReceive(NotificationCenter.default.publisher(for: UITextField.textDidBeginEditingNotification)) { obj in
@@ -63,11 +62,6 @@ struct NumberPickerWheel: View {
           .onSubmit {
             saveNumberTextfield()
           }
-        //        Button {
-        //          saveNumberTextfield()
-        //        } label: {
-        //          Label("Done", systemImage: "keyboard.chevron.compact.down")
-        //        }
       }
       .toolbar {
         ToolbarItem(placement: .keyboard) {
@@ -83,20 +77,39 @@ struct NumberPickerWheel: View {
         }
       }
     }
-    
-    
+    Divider()
+    HStack {
+      Button {
+        numberEdit = number
+      } label: {
+        Text("Reset")
+      }
+      Spacer()
+      Button {
+        if !isShowingWheel {
+          saveNumberTextfield()
+        }
+        number = numberEdit
+        dismiss()
+      } label: {
+        Text("Done")
+          .fontWeight(.semibold)
+          
+      }
+    }
+    .padding()
   }
   
   private func saveNumberTextfield() {
     focusedField = nil
     isShowingWheel.toggle()
     if let changedNumber = Int(numberTextfield) {
-      number = min(max(changedNumber, range.lowerBound), range.upperBound)
+      numberEdit = min(max(changedNumber, range.lowerBound), range.upperBound)
     }
   }
   
 }
 
-//#Preview {
-//  NumberPickerWheel(number: $XXX)
-//}
+#Preview {
+  NumberPickerWheel(number: .constant(50))
+}

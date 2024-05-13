@@ -55,10 +55,12 @@ struct ActiveSetRow: View {
         }
       }
       .popover(isPresented: $isNumberPickerWheelActiveWeight, content: {
-        NumberPickerWheel(number: $weight).presentationDetents([.medium])
+        NumberPickerWheel(number: $weight)
+          .presentationCompactAdaptation(.popover)
       })
       .popover(isPresented: $isNumberPickerWheelActiveRepetitions, content: {
-        NumberPickerWheel(number: $repetitions).presentationDetents([.medium])
+        NumberPickerWheel(number: $repetitions)
+          .presentationCompactAdaptation(.popover)
       })
     }
 }

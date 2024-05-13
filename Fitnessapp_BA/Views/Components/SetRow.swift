@@ -29,6 +29,13 @@ struct SetRow: View {
             }
             .tagStyle(isEditing ? TagButtonStyle.bordered : TagButtonStyle.plain)
             .frame(minWidth: 43)
+            .popover(isPresented: $isNumberPickerWheelActiveWeight, content: {
+              NumberPickerWheel(number: Binding(
+                get: { set.weight ?? 0 },
+                set: { newValue in set.weight = newValue }
+              ))
+              .presentationCompactAdaptation(.popover)
+            })
             Text("kg")
           }
           .fixedSize()
@@ -42,6 +49,13 @@ struct SetRow: View {
             }
             .tagStyle(isEditing ? TagButtonStyle.bordered : TagButtonStyle.plain)
             .frame(minWidth: 43)
+            .popover(isPresented: $isNumberPickerWheelActiveRepetitions, content: {
+              NumberPickerWheel(number: Binding(
+                get: { set.repetitions ?? 0 },
+                set: { newValue in set.repetitions = newValue }
+              ))
+              .presentationCompactAdaptation(.popover)
+            })
             Image(systemName: "arrow.clockwise")
           }
           .fixedSize()
@@ -68,18 +82,6 @@ struct SetRow: View {
       }
       
     }
-    .popover(isPresented: $isNumberPickerWheelActiveWeight, content: {
-      NumberPickerWheel(number: Binding(
-        get: { set.weight ?? 0 },
-        set: { newValue in set.weight = newValue }
-      )).presentationDetents([.medium])
-    })
-    .popover(isPresented: $isNumberPickerWheelActiveRepetitions, content: {
-      NumberPickerWheel(number: Binding(
-        get: { set.repetitions ?? 0 },
-        set: { newValue in set.repetitions = newValue }
-      )).presentationDetents([.medium])
-    })
   }
 }
 
