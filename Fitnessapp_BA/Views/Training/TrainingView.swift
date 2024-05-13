@@ -31,7 +31,7 @@ struct TrainingView: View {
         ExerciseRow(exercise: exercise)
       }
       .onDelete(perform: deleteExercise)
-      .onLongPressGesture(perform: openOptionsForExerciseEdit)
+//      .onLongPressGesture(perform: openOptionsForExerciseEdit)
       Section {
         Button(action: addExercise) {
           Label("Add Exercise", systemImage: "plus")
