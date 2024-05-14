@@ -48,7 +48,7 @@ struct HomeView: View {
               )
             if training.Exercises.count > 0 {
               Button {
-                startTraining(training: training)
+                selectedTraining = training
               } label: {
                 Label{
                   Text("Start Training")
@@ -57,8 +57,8 @@ struct HomeView: View {
                     .resizable()
                     .frame(width: 50, height: 50)
                     .symbolRenderingMode(.palette)
-                    .foregroundStyle(.white, .primary)
-                }.foregroundStyle(.accent)
+                    .foregroundStyle(.white, .accent)
+                }
               }
               .labelStyle(.iconOnly)
             }
@@ -104,10 +104,6 @@ struct HomeView: View {
         modelContext.delete(filteredTrainings[index])
       }
     }
-  }
-  
-  private func startTraining(training: Training) {
-    selectedTraining = training
   }
   
   private func openSettings() {

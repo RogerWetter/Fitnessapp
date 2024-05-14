@@ -589,22 +589,22 @@
         }
       }
     },
-    "Test Number: %lld" : {
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Testnummer: %lld"
-          }
-        }
-      }
-    },
     "This Training has no Exercises Yet." : {
       "localizations" : {
         "de" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Diese Trainingseinheit hat noch keine Übungen."
+          }
+        }
+      }
+    },
+    "Toggle Exercise Completed" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Übung abgeschlossen wechseln"
           }
         }
       }
