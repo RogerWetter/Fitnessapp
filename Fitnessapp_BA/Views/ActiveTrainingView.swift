@@ -39,19 +39,33 @@ struct ActiveTrainingView: View {
       } else {
         VStack {
           if isShowingList {
-            List {
-              ForEach(training.Exercises) { exercise in
-                
+            List(training.Exercises.indices, id: \.self) { idx in
                 HStack {
-                  ExerciseRow(exercise: exercise)
-                  Button{
-                    toggleCompleted(exercise: exercise)
+                  Button {
+                    activeExercise = idx
+                    isShowingList.toggle()
                   } label: {
-                    Label("Start Training", systemImage: savedExercises.first(where: { $0.exercise == exercise })?.completed ?? false ? "checkmark.square.fill" : "checkmark.square").font(.title).foregroundStyle(.accent)
+                    ExerciseRow(exercise: training.Exercises[idx])
+                  }
+                  .buttonStyle(.plain)
+                  Button {
+                    toggleCompleted(exercise: training.Exercises[idx])
+                  } label: {
+                      Label {
+                        Text("Toggle Exercise Completed")
+                      } icon: {
+                        Image(systemName: savedExercises.first(where: { $0.exercise == training.Exercises[idx] })?.completed ?? false ? "checkmark.square.fill" : "checkmark.square")
+                          .resizable()
+                          .frame(width: 50, height: 50)
+                          .symbolRenderingMode(.palette)
+                          .foregroundStyle(.white, .accent)
+                          .contentTransition(.symbolEffect(.replace))
+                      }
                   }
                   .labelStyle(.iconOnly)
+                  .buttonStyle(.plain)
                 }
-              }
+              
             }
           } else {
             VStack(alignment: .leading) {
@@ -88,14 +102,6 @@ struct ActiveTrainingView: View {
                 
               }
               if let image = training.Exercises[activeExercise].image {
-                //            GeometryReader { geometry in
-                //              Image(uiImage: UIImage(data: image)!)
-                //                .resizable()
-                //                .cornerRadius(30)
-                //                .frame(width: geometry.size.width, height: geometry.size.width, alignment: .center)
-                //                .clipped()
-                //            }
-                //            .scaledToFit()
                 HStack {
                   Spacer()
                   Image(uiImage: UIImage(data: image)!)
