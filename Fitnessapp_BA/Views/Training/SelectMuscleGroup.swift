@@ -34,22 +34,25 @@ struct SelectMuscleGroup: View {
                 .cornerRadius(5.0)
               Spacer()
               Button {
-                if muscleGroupsToAdd.contains(muscleGroup) {
+                if muscleGroupsToAdd.contains(muscleGroup) || muscleGroups.contains(muscleGroup) {
                   muscleGroupsToAdd.removeAll(where: {
+                    $0 == muscleGroup
+                  })
+                  muscleGroups.removeAll(where: {
                     $0 == muscleGroup
                   })
                 } else {
                   muscleGroupsToAdd.append(muscleGroup)
                 }
               } label: {
-                Image(systemName: muscleGroupsToAdd.contains(muscleGroup) ? "checkmark.circle" : "plus.circle")
+                Image(systemName: muscleGroupsToAdd.contains(muscleGroup) || muscleGroups.contains(muscleGroup) ? "checkmark.circle" : "plus.circle")
                   .imageScale(.large)
               }
             }
           }
         }
         .listStyle(.plain)
-        if(isCreateMuscleGroup) {
+        if isCreateMuscleGroup {
           HStack {
             TextField("New Muscle Group", text: $newMuscleGroupName)
             Button {
