@@ -11,59 +11,42 @@
         }
       }
     },
-    "%@ %lld '" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "%1$@ %2$lld '"
-          }
-        },
-        "en" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "%1$@ %2$lld '"
-          }
-        }
-      }
-    },
-    "%@ %lld x" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "%1$@ %2$lld x"
-          }
-        },
-        "en" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "%1$@ %2$lld x"
-          }
-        }
-      }
-    },
     "%@ Repetitions:" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ Wiederholungen:"
+          }
+        }
+      }
     },
     "%@ Set Pause:" : {
-
-    },
-    "%@ Set Time:" : {
-
-    },
-    "%@ Sets:" : {
-
-    },
-    "%lld '" : {
-      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "%lld '"
+            "value" : "%@ Set Pause:"
+          }
+        }
+      }
+    },
+    "%@ Set Time:" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ Set Zeit"
+          }
+        }
+      }
+    },
+    "%@ Sets:" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ Sets:"
           }
         }
       }
@@ -87,9 +70,39 @@
     "%lld Exercises" : {
       "localizations" : {
         "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "%lld Übungen"
+          "variations" : {
+            "plural" : {
+              "one" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld Übung"
+                }
+              },
+              "other" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld Übungen"
+                }
+              }
+            }
+          }
+        },
+        "en" : {
+          "variations" : {
+            "plural" : {
+              "one" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld Exercise"
+                }
+              },
+              "other" : {
+                "stringUnit" : {
+                  "state" : "new",
+                  "value" : "%lld Exercises"
+                }
+              }
+            }
           }
         }
       }
@@ -377,7 +390,14 @@
       }
     },
     "min" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "min"
+          }
+        }
+      }
     },
     "Muscle Groups" : {
       "localizations" : {
@@ -610,10 +630,24 @@
       }
     },
     "weight:" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Gewicht:"
+          }
+        }
+      }
     },
     "x" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "x"
+          }
+        }
+      }
     }
   },
   "version" : "1.0"
