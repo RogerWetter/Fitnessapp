@@ -210,6 +210,7 @@
       }
     },
     "Backward Exercise" : {
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -309,6 +310,16 @@
         }
       }
     },
+    "End" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Beenden"
+          }
+        }
+      }
+    },
     "End Set" : {
       "localizations" : {
         "de" : {
@@ -319,7 +330,18 @@
         }
       }
     },
+    "End Training" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Training Beenden"
+          }
+        }
+      }
+    },
     "Exercise completed" : {
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -350,6 +372,7 @@
       }
     },
     "Forward Exercise" : {
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -445,6 +468,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Neue Trainingseinheit"
+          }
+        }
+      }
+    },
+    "Next Exercise" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nächste Übung"
           }
         }
       }
@@ -569,7 +602,11 @@
         }
       }
     },
+    "Status: %lld %%" : {
+
+    },
     "Stop Training" : {
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -600,6 +637,7 @@
       }
     },
     "Toggle Exercise Completed" : {
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {

@@ -47,6 +47,7 @@
 		DBDC3D682BF270620054F0D5 /* EditNumberButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBDC3D672BF270620054F0D5 /* EditNumberButton.swift */; };
 		DBDC3D6A2BF289080054F0D5 /* OverflowContentViewModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBDC3D692BF289080054F0D5 /* OverflowContentViewModifier.swift */; };
 		DBEA53662BF257CB000F1402 /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = DBEA53652BF257CB000F1402 /* Localizable.xcstrings */; };
+		DBFB34FB2BF3C4C500892DCB /* ExerciseRowActiveTraining.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBFB34FA2BF3C4C500892DCB /* ExerciseRowActiveTraining.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -111,6 +112,7 @@
 		DBDC3D672BF270620054F0D5 /* EditNumberButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditNumberButton.swift; sourceTree = "<group>"; };
 		DBDC3D692BF289080054F0D5 /* OverflowContentViewModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OverflowContentViewModifier.swift; sourceTree = "<group>"; };
 		DBEA53652BF257CB000F1402 /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
+		DBFB34FA2BF3C4C500892DCB /* ExerciseRowActiveTraining.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExerciseRowActiveTraining.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -163,6 +165,7 @@
 			children = (
 				DBC414AA2BE004DC00E0F1FE /* TrainingRow.swift */,
 				DBC414AC2BE158A900E0F1FE /* ExerciseRow.swift */,
+				DBFB34FA2BF3C4C500892DCB /* ExerciseRowActiveTraining.swift */,
 				DB94AACE2BE393DE00E80D37 /* MuscleGroupRow.swift */,
 				DB94AADA2BE3F2A100E80D37 /* ImagePicker.swift */,
 				DB94AADC2BE40FCE00E80D37 /* CameraPickerView.swift */,
@@ -441,6 +444,7 @@
 				DB7B2A382BEBD19100AB7BF3 /* SettingsExercises.swift in Sources */,
 				DBDC3D6A2BF289080054F0D5 /* OverflowContentViewModifier.swift in Sources */,
 				DBC414782BDF790300E0F1FE /* Fitnessapp_BAApp.swift in Sources */,
+				DBFB34FB2BF3C4C500892DCB /* ExerciseRowActiveTraining.swift in Sources */,
 				DB94AADD2BE40FCE00E80D37 /* CameraPickerView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

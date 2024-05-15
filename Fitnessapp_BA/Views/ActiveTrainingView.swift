@@ -40,33 +40,41 @@ struct ActiveTrainingView: View {
         VStack {
           if isShowingList {
             List(training.Exercises.indices, id: \.self) { idx in
-                HStack {
-                  Button {
-                    activeExercise = idx
-                    isShowingList.toggle()
-                  } label: {
-                    ExerciseRow(exercise: training.Exercises[idx])
-                  }
-                  .buttonStyle(.plain)
-                  Button {
-                    toggleCompleted(exercise: training.Exercises[idx])
-                  } label: {
-                      Label {
-                        Text("Toggle Exercise Completed")
-                      } icon: {
-                        Image(systemName: savedExercises.first(where: { $0.exercise == training.Exercises[idx] })?.completed ?? false ? "checkmark.square.fill" : "checkmark.square")
-                          .resizable()
-                          .frame(width: 50, height: 50)
-                          .symbolRenderingMode(.palette)
-                          .foregroundStyle(.white, .accent)
-                          .contentTransition(.symbolEffect(.replace))
-                      }
-                  }
-                  .labelStyle(.iconOnly)
-                  .buttonStyle(.plain)
+              HStack {
+                Button {
+                  activeExercise = idx
+                  isShowingList.toggle()
+                } label: {
+                  ExerciseRowActiveTraining(exercise: training.Exercises[idx], status: savedExercises.first(where: { $0.exercise == training.Exercises[idx] }))
                 }
-              
+                .buttonStyle(.plain)
+              }
             }
+            HStack {
+              Button {
+                isShowingList.toggle()
+              } label: {
+                Label("Open List", systemImage: "list.bullet")
+                  .labelStyle(.iconOnly)
+              }
+              .padding()
+              Button {
+                // Scan QR
+              } label: {
+                Label("Scan QR-Code", systemImage: "qrcode.viewfinder")
+                  .labelStyle(.iconOnly)
+              }
+              .padding()
+              Button {
+                stopTraining()
+              } label: {
+                Text("End Training")
+                  .frame(maxWidth: .infinity)
+                  .font(.title2)
+              }
+              .buttonStyle(.bordered)
+            }
+            .padding(.horizontal)
           } else {
             VStack(alignment: .leading) {
               HStack {
@@ -126,6 +134,7 @@ struct ActiveTrainingView: View {
                 if isSetActive {
                   Button {
                     endSet(set: SavedSet(weight: weight, repetitions: repetitions))
+                    saveSets()
                   } label: {
                     Label("End Set", systemImage: "stop.fill")
                   }
@@ -141,14 +150,6 @@ struct ActiveTrainingView: View {
                   .buttonStyle(.borderedProminent)
                 }
               }
-              Spacer()
-              Button {
-                toggleCompleted(exercise: training.Exercises[activeExercise])
-              } label: {
-                Label("Exercise completed", systemImage: "checkmark")
-                  .frame(maxWidth: .infinity)
-              }
-              .tagStyle(savedExercises.first(where: { $0.exercise == training.Exercises[activeExercise] })?.completed != nil ? savedExercises.first(where: { $0.exercise == training.Exercises[activeExercise] })!.completed ? TagButtonStyle.prominent : TagButtonStyle.bordered : TagButtonStyle.bordered)
               
               HStack {
                 Spacer()
@@ -157,53 +158,38 @@ struct ActiveTrainingView: View {
                   .foregroundColor(Color(.systemGray))
                 Spacer()
               }
+              HStack {
+                Button {
+                  isShowingList.toggle()
+                } label: {
+                  Label("Open List", systemImage: "list.bullet")
+                    .labelStyle(.iconOnly)
+                }
+                .padding()
+                if training.Exercises.count > activeExercise + 1 {
+                  Button {
+                    forward()
+//                    toggleCompleted(exercise: training.Exercises[activeExercise])
+                  } label: {
+                    Label("Next Exercise", systemImage: "checkmark")
+                      .frame(maxWidth: .infinity)
+                      .font(.title2)
+                  }
+                  .buttonStyle(.bordered)
+                } else {
+                  Button {
+                    stopTraining()
+                  } label: {
+                    Label("End Training", systemImage: "checkmark")
+                      .frame(maxWidth: .infinity)
+                      .font(.title2)
+                  }
+                  .buttonStyle(.bordered)
+                }
+              }
             }
             .padding(.horizontal)
           }
-          HStack {
-            Button {
-              isShowingList.toggle()
-            } label: {
-              Label("Open List", systemImage: "list.bullet")
-                .frame(maxWidth: .infinity)
-            }
-            if isShowingList {
-              Button {
-                //Scan-QR
-              } label: {
-                Label("Scan QR-Code", systemImage: "qrcode.viewfinder")
-                  .frame(maxWidth: .infinity)
-              }
-            } else {
-              Button {
-                backward()
-              } label: {
-                Label("Backward Exercise", systemImage: "backward.fill")
-                  .frame(maxWidth: .infinity)
-              }
-              .disabled(activeExercise < 1)
-            }
-            if activeExercise + 1 < training.Exercises.count && !isShowingList {
-              Button {
-                forward()
-              } label: {
-                Label("Forward Exercise", systemImage: "forward.fill")
-                  .frame(maxWidth: .infinity)
-              }
-            } else {
-              Button {
-                stopTraining()
-              } label: {
-                Label("Stop Training", systemImage: "stop.fill")
-                  .frame(maxWidth: .infinity)
-              }
-            }
-          }
-          .buttonStyle(.bordered)
-          .controlSize(.large)
-          .buttonBorderShape(.automatic)
-          .labelStyle(.iconOnly)
-          .padding(.horizontal)
         }
         .navigationTitle(training.name)
         .navigationBarTitleDisplayMode(.inline)
@@ -212,7 +198,8 @@ struct ActiveTrainingView: View {
             Button {
               stopTraining()
             } label: {
-              Label("Stop Training", systemImage: "stop.fill")
+              Text("End")
+                .fontWeight(.semibold)
             }
           }
         }
@@ -229,24 +216,24 @@ struct ActiveTrainingView: View {
     isSetActive.toggle()
   }
   
-  private func toggleCompleted(exercise: Exercise) {
-    if let existingSavedExerciseIndex = savedExercises.firstIndex(where: { $0.exercise == exercise }) {
-      savedExercises[existingSavedExerciseIndex].sets = sets
-      savedExercises[existingSavedExerciseIndex].completed.toggle()
-      if savedExercises[existingSavedExerciseIndex].completed {
-        nextExercise()
-      }
-    } else {
-      let exerciseToSave = exercise
-      let savedExercise = SavedExercise(exercise: nil, sets: sets)
-      modelContext.insert(exerciseToSave)
-      savedExercise.exercise = exerciseToSave
-      savedExercise.completed = true
-      savedExercises.append(savedExercise)
-      nextExercise()
-    }
-    loadSets()
-  }
+//  private func toggleCompleted(exercise: Exercise) {
+//    if let existingSavedExerciseIndex = savedExercises.firstIndex(where: { $0.exercise == exercise }) {
+//      savedExercises[existingSavedExerciseIndex].sets = sets
+//      savedExercises[existingSavedExerciseIndex].completed.toggle()
+//      if savedExercises[existingSavedExerciseIndex].completed {
+//        nextExercise()
+//      }
+//    } else {
+//      let exerciseToSave = exercise
+//      let savedExercise = SavedExercise(exercise: nil, sets: sets)
+//      modelContext.insert(exerciseToSave)
+//      savedExercise.exercise = exerciseToSave
+//      savedExercise.completed = true
+//      savedExercises.append(savedExercise)
+//      nextExercise()
+//    }
+//    loadSets()
+//  }
   
   
   private func stopTraining() {
@@ -269,6 +256,8 @@ struct ActiveTrainingView: View {
     saveSets()
     nextExercise()
     loadSets()
+    weight = training.Exercises[activeExercise].weight ?? 0
+    repetitions = training.Exercises[activeExercise].repetitions ?? 0
   }
   
   private func nextExercise() {
