@@ -603,7 +603,14 @@
       }
     },
     "Status: %lld %%" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Status: %lld %%"
+          }
+        }
+      }
     },
     "Stop Training" : {
       "extractionState" : "stale",
@@ -632,17 +639,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Diese Trainingseinheit hat noch keine Übungen."
-          }
-        }
-      }
-    },
-    "Toggle Exercise Completed" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Übung abgeschlossen wechseln"
           }
         }
       }
