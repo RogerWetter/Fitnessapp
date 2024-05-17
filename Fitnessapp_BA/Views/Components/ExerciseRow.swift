@@ -60,6 +60,6 @@ struct ExerciseRow: View {
 }
 
 #Preview {
-  ExerciseRow(exercise: Exercise(name: "Brustpresse", device: "E10", weight: 70, muscleGroup: [], repetitions: 10, setPause: 3, setTime: 3, image: UIImage(named: "Brustzug")?.pngData()))
+  ExerciseRow(exercise: Exercise(name: "Brustpresse", device: "E10", weight: 70, muscleGroup: [], repetitions: 10, sets: 55, setPause: 3, setTime: 3, image: UIImage(named: "Brustzug")?.pngData()))
     .modelContainer(for: Exercise.self, inMemory: true)
 }

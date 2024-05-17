@@ -14,8 +14,10 @@ struct ActiveTrainingView: View {
   
   @State var activeExercise: Int = 0
   
-  @State var weight: Int = 0
-  @State var repetitions: Int = 10
+  @State var weight: Int?
+  @State var repetitions: Int?
+//  @State var setTime: Int?
+  @State var setPause: Int?
   
   @State var isSetActive = false
   @State var isShowingList = false
@@ -123,17 +125,20 @@ struct ActiveTrainingView: View {
               } else {
                 Spacer()
               }
+              TextField("Notes", text: $training.Exercises[activeExercise].notes, axis: .vertical)
+                    .lineLimit(10)
+              Divider()
               Spacer()
               ForEach($sets) { set in
-                SetRow(set: set)
+                SetRow(set: set, sets: $sets)
               }
               
               HStack {
-                ActiveSetRow(training: training, activeExercise: $activeExercise, weight: $weight, repetitions: $repetitions)
+                ActiveSetRow(training: training, activeExercise: $activeExercise, weight: $weight, repetitions: $repetitions, setPause: $setPause)
                 Spacer()
                 if isSetActive {
                   Button {
-                    endSet(set: SavedSet(weight: weight, repetitions: repetitions))
+                    endSet(set: SavedSet(weight: weight, repetitions: repetitions, setPause: setPause))
                     saveSets()
                   } label: {
                     Label("End Set", systemImage: "stop.fill")
@@ -256,8 +261,10 @@ struct ActiveTrainingView: View {
     saveSets()
     nextExercise()
     loadSets()
-    weight = training.Exercises[activeExercise].weight ?? 0
-    repetitions = training.Exercises[activeExercise].repetitions ?? 0
+    weight = training.Exercises[activeExercise].weight
+    repetitions = training.Exercises[activeExercise].repetitions
+//    setTime = training.Exercises[activeExercise].setTime
+    setPause = training.Exercises[activeExercise].setPause
   }
   
   private func nextExercise() {

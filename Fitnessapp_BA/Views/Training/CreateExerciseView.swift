@@ -15,6 +15,7 @@ struct CreateExerciseView: View {
   var exercisesToAdd: Binding<[Exercise]>?
   
   @State var name: String = ""
+  @State var notes: String = ""
   @State var device: String = ""
   @State var muscleGroups: [MuscleGroup] = []
   @State var weight: Int = 0
@@ -77,82 +78,24 @@ struct CreateExerciseView: View {
           }
         )
         .cornerRadius(20)
-        TextField("Exercise Name", text: $name)
-          .font(.title)
-          .multilineTextAlignment(.center)
-          .textFieldStyle(.plain)
-          .padding()
-          .focused($focusedField, equals: .field)
-          .onAppear {
-            self.focusedField = .field
-          }
-        TextField("Device", text: $device)
-          .font(.title2)
-          .padding(.all, 8.0)
-          .overlay(RoundedRectangle(cornerRadius: 15).stroke(Color(.systemGray4), lineWidth: 2))
-        HStack {
-          MuscleGroupRow(muscleGroups: muscleGroups)
-            .scaledToFit()
-          Button {
-            isShowingSelectMuscleGroup.toggle()
-          } label: {
-            if muscleGroups.isEmpty {
-              Label("Select Muscle Groups", systemImage: "plus")
-            } else {
-              Label("Select Muscle Groups", systemImage: "plus")
-                .labelStyle(.iconOnly)
-            }
-          }
-        }
-        .padding(.vertical)
-        HStack {
-          Text("weight:")
-          Spacer()
-          EditNumberButton(number: $weight)
-          Text("kg")
-            .frame(width: 30)
-        }
-        HStack {
-          Text("\(Image(systemName: "arrow.clockwise")) Repetitions:")
-          Spacer()
-          EditNumberButton(number: $repetitions)
-          Text("x")
-            .frame(width: 30)
-        }
-        HStack {
-          Text("\(Image(systemName: "arrow.triangle.2.circlepath")) Sets:")
-          Spacer()
-          EditNumberButton(number: $sets)
-          Text("x")
-            .frame(width: 30)
-        }
-        HStack {
-          Text("\(Image(systemName: "clock.arrow.2.circlepath")) Set Pause:")
-          Spacer()
-          EditNumberButton(number: $setPause)
-          Text("min")
-            .frame(width: 30)
-        }
-        HStack {
-          Text("\(Image(systemName: "clock.arrow.2.circlepath")) Set Time:")
-          Spacer()
-          EditNumberButton(number: $setTime)
-          Text("min")
-            .frame(width: 30)
-        }
+        
+        ExerciseInputFieldsView(name: $name, notes: $notes, device: $device, muscleGroups: $muscleGroups, weight: $weight, repetitions: $repetitions, sets: $sets, setPause: $setPause, setTime: $setTime, isShowingSelectMuscleGroup: $isShowingSelectMuscleGroup)
+
       }
       .padding()
-      .navigationTitle("New Training")
+      .navigationTitle("New Exercise")
       .navigationBarTitleDisplayMode(.inline)
       .toolbar {
         ToolbarItemGroup(placement: .navigationBarLeading) {
-          Button(action: dismissAction) {
+          Button {
+            dismiss()
+          } label: {
             Text("Cancel")
           }
           .foregroundColor(.red)
         }
         ToolbarItemGroup(placement: .navigationBarTrailing) {
-          Button(action: createTraining) {
+          Button(action: createExercise) {
             Text("Create")
               .fontWeight(name.isEmpty ? .regular : .semibold)
           }
@@ -181,16 +124,15 @@ struct CreateExerciseView: View {
     }
   }
   
-  private func dismissAction() {
-    dismiss()
-  }
-  
-  private func createTraining() {
+  private func createExercise() {
     let newExercise = Exercise(
       name: name,
+      notes: notes,
       device: device.isEmpty ? nil : device,
       weight: weight == 0 ? nil : weight,
       muscleGroup: muscleGroups,
+      repetitions: repetitions == 0 ? nil : repetitions,
+      sets: sets == 0 ? nil : sets,
       setPause: setPause == 0 ? nil : setPause,
       setTime: setTime == 0 ? nil : setTime,
       image: imageData

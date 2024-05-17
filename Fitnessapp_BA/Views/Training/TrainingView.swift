@@ -28,10 +28,12 @@ struct TrainingView: View {
   var body: some View {
     List {
       ForEach(filteredExercises) { exercise in
-        ExerciseRow(exercise: exercise)
+        NavigationLink(destination: {
+          ExerciseView(exercise: .constant(exercise))
+        }, label: {
+          ExerciseRow(exercise: exercise)})
       }
       .onDelete(perform: deleteExercise)
-//      .onLongPressGesture(perform: openOptionsForExerciseEdit)
       Section {
         Button(action: addExercise) {
           Label("Add Exercise", systemImage: "plus")

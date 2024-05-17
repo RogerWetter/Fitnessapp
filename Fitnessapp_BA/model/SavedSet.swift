@@ -15,7 +15,7 @@ final class SavedSet {
   var setPause: Int?
   var setTime: Int?
   
-  init(weight: Int? = nil, repetitions: Int? = nil, sets: Int? = nil, setPause: Int? = nil, setTime: Int? = nil) {
+  init(weight: Int? = nil, repetitions: Int? = nil, setPause: Int? = nil, setTime: Int? = nil) {
     self.weight = weight
     self.repetitions = repetitions
     self.setPause = setPause

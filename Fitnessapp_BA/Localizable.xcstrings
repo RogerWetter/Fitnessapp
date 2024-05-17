@@ -12,6 +12,7 @@
       }
     },
     "%@ Repetitions:" : {
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -22,6 +23,7 @@
       }
     },
     "%@ Set Pause:" : {
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -32,6 +34,7 @@
       }
     },
     "%@ Set Time:" : {
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -42,6 +45,7 @@
       }
     },
     "%@ Sets:" : {
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -50,6 +54,9 @@
           }
         }
       }
+    },
+    "%@:" : {
+
     },
     "%lld %@" : {
       "localizations" : {
@@ -169,6 +176,9 @@
         }
       }
     },
+    "Add to Training" : {
+
+    },
     "Add Training" : {
       "localizations" : {
         "de" : {
@@ -280,6 +290,9 @@
         }
       }
     },
+    "Delete" : {
+
+    },
     "Device" : {
       "localizations" : {
         "de" : {
@@ -289,6 +302,9 @@
           }
         }
       }
+    },
+    "Device:" : {
+
     },
     "Done" : {
       "localizations" : {
@@ -300,6 +316,9 @@
         }
       }
     },
+    "Duplicate" : {
+
+    },
     "Edit" : {
       "localizations" : {
         "de" : {
@@ -309,6 +328,9 @@
           }
         }
       }
+    },
+    "Edit Exercise" : {
+
     },
     "End" : {
       "localizations" : {
@@ -403,6 +425,7 @@
       }
     },
     "kg" : {
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -412,7 +435,11 @@
         }
       }
     },
+    "menu" : {
+
+    },
     "min" : {
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -452,6 +479,9 @@
         }
       }
     },
+    "New Exercise" : {
+
+    },
     "New Muscle Group" : {
       "localizations" : {
         "de" : {
@@ -481,6 +511,9 @@
           }
         }
       }
+    },
+    "Notes" : {
+
     },
     "One Exercise" : {
       "localizations" : {
@@ -664,6 +697,7 @@
       }
     },
     "weight:" : {
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -674,6 +708,7 @@
       }
     },
     "x" : {
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {

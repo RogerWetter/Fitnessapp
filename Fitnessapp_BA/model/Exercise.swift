@@ -11,6 +11,7 @@ import SwiftData
 @Model
 final class Exercise {
   var name: String
+  var notes: String
   var device: String?
   var weight: Int?
   var muscleGroups: [MuscleGroup] = []
@@ -22,11 +23,12 @@ final class Exercise {
   @Attribute(.externalStorage)
   var image: Data?
   
-  init(name: String, device: String?, weight: Int?, muscleGroup: [MuscleGroup]? = nil, repetitions: Int? = 10, sets: Int? = 3, setPause: Int?, setTime: Int?, image: Data?) {
+  init(name: String, notes: String = "", device: String?, weight: Int?, muscleGroup: [MuscleGroup] = [], repetitions: Int?, sets: Int?, setPause: Int?, setTime: Int?, image: Data?) {
     self.name = name
+    self.notes = notes
     self.device = device
     self.weight = weight
-    self.muscleGroups = muscleGroup ?? []
+    self.muscleGroups = muscleGroup
     self.repetitions = repetitions
     self.sets = sets
     self.setPause = setPause
@@ -36,6 +38,7 @@ final class Exercise {
   
   init() {
     self.name = "Brustpresse"
+    self.notes = "Notes to the Exercise"
     self.device = "E9"
     self.weight = 50
     self.muscleGroups = [MuscleGroup(name: "Oberkörper", color: MuscleGroupColor.green.rawValue)]
