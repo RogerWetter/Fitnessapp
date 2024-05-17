@@ -79,7 +79,7 @@ struct ExerciseInputFieldsView: View {
     
     EditExerciseNumberRowView(number: $sets, sysImage: "arrow.triangle.2.circlepath", name: "Sets", unit: "x")
     
-    EditExerciseNumberRowView(number: $setTime, sysImage: "clock.arrow.2.circlepath", name: "Set Time", unit: "min")
+//    EditExerciseNumberRowView(number: $setTime, sysImage: "clock.arrow.2.circlepath", name: "Set Time", unit: "min")
     
     EditExerciseNumberRowView(number: $setPause, sysImage: "pause", name: "Set Pause", unit: "min")
     
