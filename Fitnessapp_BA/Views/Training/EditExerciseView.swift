@@ -146,6 +146,7 @@ struct EditExerciseView: View {
     exercise.setTime = setTime == 0 ? nil : setTime
     exercise.setPause = setPause == 0 ? nil : setPause
     exercise.muscleGroups = muscleGroups
+    exercise.image = imageData
     isShowingEdit.toggle()
   }
 }
