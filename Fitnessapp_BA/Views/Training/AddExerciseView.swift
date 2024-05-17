@@ -16,7 +16,7 @@ struct AddExerciseView: View {
   
   var filteredExercisesNotInTraining: [Exercise] {
     return exercises.filter { exercise in
-      !training.Exercises.contains(exercise)
+      !training.exercises.contains(exercise)
     }
   }
   
@@ -36,7 +36,7 @@ struct AddExerciseView: View {
   
   var filteredExercisesMarked: [Exercise] {
     return filteredExercisesSearchbar.filter { exercise in
-      exercisesToAdd.contains(exercise) || training.Exercises.contains(exercise)
+      exercisesToAdd.contains(exercise) || training.exercises.contains(exercise)
     }
   }
   
@@ -125,7 +125,8 @@ struct AddExerciseView: View {
   }
   
   private func doneAction() {
-    training.Exercises.append(contentsOf: exercisesToAdd)
+//    training.exercises.append(contentsOf: exercisesToAdd)
+    training.addExercises(exercisesToAdd)
     dismiss()
   }
   

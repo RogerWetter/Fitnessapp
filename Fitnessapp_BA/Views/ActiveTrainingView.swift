@@ -29,7 +29,7 @@ struct ActiveTrainingView: View {
   
   var body: some View {
     NavigationView {
-      if training.Exercises.isEmpty {
+      if training.exercises.isEmpty {
         VStack {
           Text("This Training has no Exercises Yet.")
           Button {
@@ -41,13 +41,13 @@ struct ActiveTrainingView: View {
       } else {
         VStack {
           if isShowingList {
-            List(training.Exercises.indices, id: \.self) { idx in
+            List(training.exercises.indices, id: \.self) { idx in
               HStack {
                 Button {
                   activeExercise = idx
                   isShowingList.toggle()
                 } label: {
-                  ExerciseRowActiveTraining(exercise: training.Exercises[idx], status: savedExercises.first(where: { $0.exercise == training.Exercises[idx] }))
+                  ExerciseRowActiveTraining(exercise: training.exercises[idx], status: savedExercises.first(where: { $0.exercise == training.exercises[idx] }))
                 }
                 .buttonStyle(.plain)
               }
@@ -80,38 +80,38 @@ struct ActiveTrainingView: View {
           } else {
             VStack(alignment: .leading) {
               HStack {
-                if let device = training.Exercises[activeExercise].device {
+                if let device = training.exercises[activeExercise].device {
                   Text(device)
                     .font(.caption)
                 }
-                MuscleGroupRow(muscleGroups: training.Exercises[activeExercise].muscleGroups)
+                MuscleGroupRow(muscleGroups: training.exercises[activeExercise].muscleGroups)
               }
-              Text(training.Exercises[activeExercise].name).font(.title)
+              Text(training.exercises[activeExercise].name).font(.title)
               HStack {
-                if let weight = training.Exercises[activeExercise].weight {
+                if let weight = training.exercises[activeExercise].weight {
                   Text("\(weight) kg")
                     .font(.caption)
                 }
-                if let repetitions = training.Exercises[activeExercise].repetitions {
+                if let repetitions = training.exercises[activeExercise].repetitions {
                   Text("\(repetitions) \(Image(systemName: "arrow.clockwise"))")
                     .font(.caption)
                 }
-                if let sets = training.Exercises[activeExercise].sets {
+                if let sets = training.exercises[activeExercise].sets {
                   Text("\(sets) \(Image(systemName: "arrow.triangle.2.circlepath"))")
                     .font(.caption)
                 }
-                if let setTime = training.Exercises[activeExercise].setTime {
+                if let setTime = training.exercises[activeExercise].setTime {
                   Text("\(setTime)' \(Image(systemName: "clock.arrow.2.circlepath"))")
                     .font(.caption)
                 }
-                if let setPause = training.Exercises[activeExercise].setPause {
+                if let setPause = training.exercises[activeExercise].setPause {
                   Text("\(setPause)' \(Image(systemName: "pause"))")
                     .font(.caption)
                 }
                 
                 
               }
-              if let image = training.Exercises[activeExercise].image {
+              if let image = training.exercises[activeExercise].image {
                 HStack {
                   Spacer()
                   Image(uiImage: UIImage(data: image)!)
@@ -125,7 +125,7 @@ struct ActiveTrainingView: View {
               } else {
                 Spacer()
               }
-              TextField("Notes", text: $training.Exercises[activeExercise].notes, axis: .vertical)
+              TextField("Notes", text: $training.exercisesUnsorted[activeExercise].notes, axis: .vertical)
                     .lineLimit(10)
               Divider()
               Spacer()
@@ -158,7 +158,7 @@ struct ActiveTrainingView: View {
               
               HStack {
                 Spacer()
-                Text("\(activeExercise + 1)/\(training.Exercises.count)")
+                Text("\(activeExercise + 1)/\(training.exercises.count)")
                   .padding(EdgeInsets(top: 5, leading: 0, bottom: 15, trailing: 0))
                   .foregroundColor(Color(.systemGray))
                 Spacer()
@@ -171,10 +171,10 @@ struct ActiveTrainingView: View {
                     .labelStyle(.iconOnly)
                 }
                 .padding()
-                if training.Exercises.count > activeExercise + 1 {
+                if training.exercises.count > activeExercise + 1 {
                   Button {
                     forward()
-//                    toggleCompleted(exercise: training.Exercises[activeExercise])
+//                    toggleCompleted(exercise: training.exercises[activeExercise])
                   } label: {
                     Label("Next Exercise", systemImage: "checkmark")
                       .frame(maxWidth: .infinity)
@@ -222,10 +222,10 @@ struct ActiveTrainingView: View {
   }
   
 //  private func toggleCompleted(exercise: Exercise) {
-//    if let existingSavedExerciseIndex = savedExercises.firstIndex(where: { $0.exercise == exercise }) {
-//      savedExercises[existingSavedExerciseIndex].sets = sets
-//      savedExercises[existingSavedExerciseIndex].completed.toggle()
-//      if savedExercises[existingSavedExerciseIndex].completed {
+//    if let existingSavedExerciseIndex = savedexercises.firstIndex(where: { $0.exercise == exercise }) {
+//      savedexercises[existingSavedExerciseIndex].sets = sets
+//      savedexercises[existingSavedExerciseIndex].completed.toggle()
+//      if savedexercises[existingSavedExerciseIndex].completed {
 //        nextExercise()
 //      }
 //    } else {
@@ -234,7 +234,7 @@ struct ActiveTrainingView: View {
 //      modelContext.insert(exerciseToSave)
 //      savedExercise.exercise = exerciseToSave
 //      savedExercise.completed = true
-//      savedExercises.append(savedExercise)
+//      savedexercises.append(savedExercise)
 //      nextExercise()
 //    }
 //    loadSets()
@@ -261,24 +261,24 @@ struct ActiveTrainingView: View {
     saveSets()
     nextExercise()
     loadSets()
-    weight = training.Exercises[activeExercise].weight
-    repetitions = training.Exercises[activeExercise].repetitions
-//    setTime = training.Exercises[activeExercise].setTime
-    setPause = training.Exercises[activeExercise].setPause
+    weight = training.exercises[activeExercise].weight
+    repetitions = training.exercises[activeExercise].repetitions
+//    setTime = training.exercises[activeExercise].setTime
+    setPause = training.exercises[activeExercise].setPause
   }
   
   private func nextExercise() {
-    if activeExercise + 1 < training.Exercises.count {
+    if activeExercise + 1 < training.exercises.count {
       activeExercise += 1
     }
   }
   
   private func saveSets() {
-    if let existingSavedExerciseIndex = savedExercises.firstIndex(where: { $0.exercise == training.Exercises[activeExercise] }) {
+    if let existingSavedExerciseIndex = savedExercises.firstIndex(where: { $0.exercise == training.exercises[activeExercise] }) {
       savedExercises[existingSavedExerciseIndex].sets = sets
     } else {
       // I am afraid, this has to be like this
-      let exercise = training.Exercises[activeExercise]
+      let exercise = training.exercises[activeExercise]
       let savedExercise = SavedExercise(exercise: nil, sets: sets)
       modelContext.insert(exercise)
       savedExercise.exercise = exercise
@@ -287,7 +287,7 @@ struct ActiveTrainingView: View {
   }
   
   private func loadSets() {
-    if let existingSavedExerciseIndex = savedExercises.firstIndex(where: { $0.exercise == training.Exercises[activeExercise] }) {
+    if let existingSavedExerciseIndex = savedExercises.firstIndex(where: { $0.exercise == training.exercises[activeExercise] }) {
       sets = savedExercises[existingSavedExerciseIndex].sets
     } else {
       sets = []

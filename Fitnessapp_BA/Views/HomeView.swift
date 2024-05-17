@@ -46,7 +46,7 @@ struct HomeView: View {
                 NavigationLink("", destination: TrainingView(training: training))
                   .opacity(0)
               )
-            if training.Exercises.count > 0 {
+            if training.exercises.count > 0 {
               Button {
                 selectedTraining = training
               } label: {

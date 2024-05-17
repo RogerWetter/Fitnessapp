@@ -9,7 +9,7 @@ import SwiftUI
 
 struct TrainingRow: View {
   
-  let training: Training
+  @Bindable var training: Training
   @State private var isShowingExerciseView = false
   
   var body: some View {
@@ -17,10 +17,10 @@ struct TrainingRow: View {
       VStack(alignment: .leading) {
         MuscleGroupRow(muscleGroups: training.uniqueMuscleGroups)
         Text(training.name).font(.title)
-        if (training.Exercises.count == 1) {
+        if (training.exercises.count == 1) {
           Text("One Exercise")
         } else {
-          Text("\(training.Exercises.count) Exercises")
+          Text("\(training.exercises.count) Exercises")
         }
       }
     }

@@ -15,9 +15,9 @@ struct TrainingView: View {
   @State var searchingText = ""
   
   var filteredExercises: [Exercise] {
-    guard !searchingText.isEmpty else { return training.Exercises }
+    guard !searchingText.isEmpty else { return training.exercises }
     
-    return training.Exercises.filter { exercise in
+    return training.exercises.filter { exercise in
       exercise.name.lowercased().contains(searchingText.lowercased())
     }
   }
@@ -32,6 +32,12 @@ struct TrainingView: View {
           ExerciseView(exercise: .constant(exercise))
         }, label: {
           ExerciseRow(exercise: exercise)})
+      }
+      .onMove { indices, newOffset in
+//        training.moveExercise(from: from, to: to) // Cannot convert value of type 'IndexSet' to expected argument type 'Int'
+        if let oldOffset = indices.first {
+            training.moveExercise(from: oldOffset, to: newOffset)
+        }
       }
       .onDelete(perform: deleteExercise)
       Section {
@@ -80,7 +86,8 @@ struct TrainingView: View {
   private func deleteExercise(offsets: IndexSet) {
     withAnimation {
       for index in offsets {
-        training.Exercises.remove(at: index)
+//        training.exercises.remove(at: index)
+        training.removeExercise(at: index)
       }
     }
   }

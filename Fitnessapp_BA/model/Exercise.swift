@@ -23,6 +23,8 @@ final class Exercise {
   @Attribute(.externalStorage)
   var image: Data?
   
+  var trainings: [Training] = []
+  
   init(name: String, notes: String = "", device: String?, weight: Int?, muscleGroup: [MuscleGroup] = [], repetitions: Int?, sets: Int?, setPause: Int?, setTime: Int?, image: Data?) {
     self.name = name
     self.notes = notes
@@ -34,15 +36,5 @@ final class Exercise {
     self.setPause = setPause
     self.setTime = setTime
     self.image = image
-  }
-  
-  init() {
-    self.name = "Brustpresse"
-    self.notes = "Notes to the Exercise"
-    self.device = "E9"
-    self.weight = 50
-    self.muscleGroups = [MuscleGroup(name: "Oberkörper", color: MuscleGroupColor.green.rawValue)]
-    self.repetitions = 10
-    self.sets = 3
   }
 }
