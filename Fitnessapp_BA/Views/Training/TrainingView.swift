@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct TrainingView: View {
+  @Environment(\.modelContext) private var modelContext
+  @Environment(\.dismiss) var dismiss
   
   @Bindable var training: Training
   
@@ -34,7 +36,6 @@ struct TrainingView: View {
           ExerciseRow(exercise: exercise)})
       }
       .onMove { indices, newOffset in
-//        training.moveExercise(from: from, to: to) // Cannot convert value of type 'IndexSet' to expected argument type 'Int'
         if let oldOffset = indices.first {
             training.moveExercise(from: oldOffset, to: newOffset)
         }
@@ -63,7 +64,7 @@ struct TrainingView: View {
       AddExerciseView(training: training).presentationDetents([.large])
     }
     .fullScreenCover(isPresented: $isShowingActiveTrainingView) {
-      ActiveTrainingView(training: training)
+      ActiveTrainingView(activeTrainingModel: ActiveTrainingModel(modelContext: modelContext, training: training))
     }
   }
   
@@ -86,7 +87,6 @@ struct TrainingView: View {
   private func deleteExercise(offsets: IndexSet) {
     withAnimation {
       for index in offsets {
-//        training.exercises.remove(at: index)
         training.removeExercise(at: index)
       }
     }

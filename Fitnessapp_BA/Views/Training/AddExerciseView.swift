@@ -125,7 +125,6 @@ struct AddExerciseView: View {
   }
   
   private func doneAction() {
-//    training.exercises.append(contentsOf: exercisesToAdd)
     training.addExercises(exercisesToAdd)
     dismiss()
   }

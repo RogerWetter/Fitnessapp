@@ -10,10 +10,11 @@ import SwiftData
 
 struct HomeView: View {
   @Environment(\.modelContext) private var modelContext
+  @Environment(\.dismiss) var dismiss
   @Query private var trainings: [Training]
   @State private var isShowingSettingsView = false
   @State private var isShowingAddTrainingView = false
-  @State private var selectedTraining: Training?
+  @State private var activeTrainingModel: ActiveTrainingModel?
   
   
   @State var searchingText = ""
@@ -48,7 +49,7 @@ struct HomeView: View {
               )
             if training.exercises.count > 0 {
               Button {
-                selectedTraining = training
+                activeTrainingModel = ActiveTrainingModel(modelContext: modelContext, training: training)
               } label: {
                 Label{
                   Text("Start Training")
@@ -84,8 +85,8 @@ struct HomeView: View {
     .sheet(isPresented: $isShowingAddTrainingView) {
       AddTrainingView().presentationDetents([.fraction(0.20)])
     }
-    .fullScreenCover(item: $selectedTraining) { training in
-      ActiveTrainingView(training: training)
+    .fullScreenCover(item: $activeTrainingModel) { activeTrainingModel in
+      ActiveTrainingView(activeTrainingModel: activeTrainingModel)
     }
     .sheet(isPresented: $isShowingSettingsView) {
       SettingsView().presentationDetents([.large])

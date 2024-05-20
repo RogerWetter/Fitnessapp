@@ -43,6 +43,9 @@
 		DBC414A92BDFF4EE00E0F1FE /* TrainingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBC414A82BDFF4EE00E0F1FE /* TrainingView.swift */; };
 		DBC414AB2BE004DC00E0F1FE /* TrainingRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBC414AA2BE004DC00E0F1FE /* TrainingRow.swift */; };
 		DBC414AD2BE158A900E0F1FE /* ExerciseRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBC414AC2BE158A900E0F1FE /* ExerciseRow.swift */; };
+		DBC981382BF9F736003F6662 /* ActiveTrainingListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBC981372BF9F736003F6662 /* ActiveTrainingListView.swift */; };
+		DBC9813A2BFA0483003F6662 /* ActiveTrainingModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBC981392BFA0483003F6662 /* ActiveTrainingModel.swift */; };
+		DBC9813C2BFB2CAA003F6662 /* ActiveTrainingExerciseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBC9813B2BFB2CAA003F6662 /* ActiveTrainingExerciseView.swift */; };
 		DBDC3D662BF25F490054F0D5 /* InfoPlist.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = DBDC3D652BF25F490054F0D5 /* InfoPlist.xcstrings */; };
 		DBDC3D682BF270620054F0D5 /* EditNumberButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBDC3D672BF270620054F0D5 /* EditNumberButton.swift */; };
 		DBDC3D6A2BF289080054F0D5 /* OverflowContentViewModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBDC3D692BF289080054F0D5 /* OverflowContentViewModifier.swift */; };
@@ -113,6 +116,9 @@
 		DBC414A82BDFF4EE00E0F1FE /* TrainingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrainingView.swift; sourceTree = "<group>"; };
 		DBC414AA2BE004DC00E0F1FE /* TrainingRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrainingRow.swift; sourceTree = "<group>"; };
 		DBC414AC2BE158A900E0F1FE /* ExerciseRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseRow.swift; sourceTree = "<group>"; };
+		DBC981372BF9F736003F6662 /* ActiveTrainingListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActiveTrainingListView.swift; sourceTree = "<group>"; };
+		DBC981392BFA0483003F6662 /* ActiveTrainingModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActiveTrainingModel.swift; sourceTree = "<group>"; };
+		DBC9813B2BFB2CAA003F6662 /* ActiveTrainingExerciseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActiveTrainingExerciseView.swift; sourceTree = "<group>"; };
 		DBDC3D652BF25F490054F0D5 /* InfoPlist.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = InfoPlist.xcstrings; sourceTree = "<group>"; };
 		DBDC3D672BF270620054F0D5 /* EditNumberButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditNumberButton.swift; sourceTree = "<group>"; };
 		DBDC3D692BF289080054F0D5 /* OverflowContentViewModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OverflowContentViewModifier.swift; sourceTree = "<group>"; };
@@ -195,6 +201,7 @@
 		DB7B2A3B2BEBD64B00AB7BF3 /* Training */ = {
 			isa = PBXGroup;
 			children = (
+				DBC981362BF9F70B003F6662 /* ActiveTraining */,
 				DBC414A82BDFF4EE00E0F1FE /* TrainingView.swift */,
 				DB94AAC52BE278AA00E80D37 /* AddTrainingView.swift */,
 				DB94AAC92BE371A500E80D37 /* AddExerciseView.swift */,
@@ -216,7 +223,6 @@
 				DB7B2A312BEBC2E800AB7BF3 /* Analyse */,
 				DB7B2A302BEBC2A700AB7BF3 /* Settings */,
 				DB94AAC72BE28FFB00E80D37 /* HomeView.swift */,
-				DB94AAD22BE39C4300E80D37 /* ActiveTrainingView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -292,6 +298,17 @@
 				DBC414A62BDFD36000E0F1FE /* MuscleGroup.swift */,
 			);
 			path = model;
+			sourceTree = "<group>";
+		};
+		DBC981362BF9F70B003F6662 /* ActiveTraining */ = {
+			isa = PBXGroup;
+			children = (
+				DB94AAD22BE39C4300E80D37 /* ActiveTrainingView.swift */,
+				DBC981372BF9F736003F6662 /* ActiveTrainingListView.swift */,
+				DBC981392BFA0483003F6662 /* ActiveTrainingModel.swift */,
+				DBC9813B2BFB2CAA003F6662 /* ActiveTrainingExerciseView.swift */,
+			);
+			path = ActiveTraining;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -448,6 +465,7 @@
 				DBC414AD2BE158A900E0F1FE /* ExerciseRow.swift in Sources */,
 				DB7B2A492BEE6CB300AB7BF3 /* TagButtonStyle.swift in Sources */,
 				DB94AAD12BE39AF100E80D37 /* SettingsView.swift in Sources */,
+				DBC9813A2BFA0483003F6662 /* ActiveTrainingModel.swift in Sources */,
 				DB7B2A412BECF63100AB7BF3 /* SettingsSavedExercises.swift in Sources */,
 				DBFB34FD2BF4B19B00892DCB /* ExerciseView.swift in Sources */,
 				DB7B2A2D2BE930B600AB7BF3 /* AllExercisesView.swift in Sources */,
@@ -457,10 +475,12 @@
 				DB94AAC82BE28FFB00E80D37 /* HomeView.swift in Sources */,
 				DB94AAD72BE3E6EB00E80D37 /* CreateExerciseView.swift in Sources */,
 				DB94AAC62BE278AA00E80D37 /* AddTrainingView.swift in Sources */,
+				DBC981382BF9F736003F6662 /* ActiveTrainingListView.swift in Sources */,
 				DBC414A72BDFD36000E0F1FE /* MuscleGroup.swift in Sources */,
 				DBC414A92BDFF4EE00E0F1FE /* TrainingView.swift in Sources */,
 				DB7B2A472BEE591B00AB7BF3 /* ActiveSetRow.swift in Sources */,
 				DB7B2A382BEBD19100AB7BF3 /* SettingsExercises.swift in Sources */,
+				DBC9813C2BFB2CAA003F6662 /* ActiveTrainingExerciseView.swift in Sources */,
 				DBDC3D6A2BF289080054F0D5 /* OverflowContentViewModifier.swift in Sources */,
 				DBC414782BDF790300E0F1FE /* Fitnessapp_BAApp.swift in Sources */,
 				DBFB34FB2BF3C4C500892DCB /* ExerciseRowActiveTraining.swift in Sources */,
