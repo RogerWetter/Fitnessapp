@@ -56,7 +56,14 @@
       }
     },
     "%@:" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@:"
+          }
+        }
+      }
     },
     "%lld %@" : {
       "localizations" : {
@@ -177,7 +184,14 @@
       }
     },
     "Add to Training" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hinzufügen zu Trainingseinheit"
+          }
+        }
+      }
     },
     "Add Training" : {
       "localizations" : {
@@ -291,7 +305,14 @@
       }
     },
     "Delete" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Löschen"
+          }
+        }
+      }
     },
     "Device" : {
       "localizations" : {
@@ -304,7 +325,14 @@
       }
     },
     "Device:" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Gerät"
+          }
+        }
+      }
     },
     "Done" : {
       "localizations" : {
@@ -317,7 +345,14 @@
       }
     },
     "Duplicate" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Duplizieren"
+          }
+        }
+      }
     },
     "Edit" : {
       "localizations" : {
@@ -330,7 +365,14 @@
       }
     },
     "Edit Exercise" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Übung bearbeiten"
+          }
+        }
+      }
     },
     "End" : {
       "localizations" : {
@@ -436,7 +478,14 @@
       }
     },
     "menu" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Menu"
+          }
+        }
+      }
     },
     "min" : {
       "extractionState" : "stale",
@@ -480,7 +529,14 @@
       }
     },
     "New Exercise" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Neue Übung"
+          }
+        }
+      }
     },
     "New Muscle Group" : {
       "localizations" : {
@@ -513,7 +569,14 @@
       }
     },
     "Notes" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Notizen"
+          }
+        }
+      }
     },
     "One Exercise" : {
       "localizations" : {

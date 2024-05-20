@@ -33,11 +33,6 @@ struct ExerciseView: View {
             .clipped()
             .padding()
         } else {
-          //            Rectangle()
-          //              .cornerRadius(30)
-          //              .frame(width: 300, height: 300)
-          //              .clipped()
-          //              .padding()
           Menu {
             Button {
               isShowingCamera.toggle()
