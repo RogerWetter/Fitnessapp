@@ -1,5 +1,5 @@
 //
-//  SettingsMuscleGroups.swift
+//  SettingsSavedExercises.swift
 //  Fitnessapp_BA
 //
 //  Created by roger wetter on 08.05.2024.
@@ -9,9 +9,8 @@ import SwiftUI
 import SwiftData
 
 struct SettingsSavedExercises: View {
-  
   @Environment(\.modelContext) private var modelContext
-  @Query private var savedExercises: [SavedExercise]
+  @Query(sort: \SavedExercise.timeStamp, order: .reverse) private var savedExercises: [SavedExercise]
   @State var searchingText = ""
   
   var filteredExercises: [SavedExercise] {
@@ -30,19 +29,17 @@ struct SettingsSavedExercises: View {
   
   var body: some View {
     List {
-      Section {
-        ForEach(filteredExercises) { savedExercise in
-          VStack {
-            Text(savedExercise.timeStamp.ISO8601Format())
-            if savedExercise.exercise != nil {
-              ExerciseRow(exercise: savedExercise.exercise!)
+      ForEach(groupedExercises.keys.sorted(by: >), id: \.self) { date in
+        Section(header: Text(formattedDate(date))) {
+          ForEach(groupedExercises[date] ?? []) { savedExercise in
+            VStack {
+              ExerciseRowActiveTraining(exercise: savedExercise.exercise!, savedExercise: savedExercise)
             }
-//            ForEach(savedExercise.sets) { savedSet in
-//              Text("weight: \(String(savedSet.weight)) repetitions \(String(savedSet.repetitions))")
-//            }
+          }
+          .onDelete { indexSet in
+            deleteExercise(at: indexSet, from: date)
           }
         }
-        .onDelete(perform: deleteExercise)
       }
     }
     .searchable(text: $searchingText)
@@ -57,8 +54,33 @@ struct SettingsSavedExercises: View {
     }
   }
   
+  private var groupedExercises: [Date: [SavedExercise]] {
+    Dictionary(grouping: filteredExercises) { exercise in
+      // Remove time components from the date
+      let calendar = Calendar.current
+      let components = calendar.dateComponents([.year, .month, .day], from: exercise.timeStamp)
+      return calendar.date(from: components) ?? exercise.timeStamp
+    }
+  }
+  
+  private func formattedDate(_ date: Date) -> String {
+    let formatter = DateFormatter()
+    formatter.dateStyle = .medium
+    return formatter.string(from: date)
+  }
+  
   private func createExercise() {
     isShowingCreateExerciseView.toggle()
+  }
+  
+  private func deleteExercise(at offsets: IndexSet, from date: Date) {
+    withAnimation {
+      for index in offsets {
+        if let exercise = groupedExercises[date]?[index] {
+          modelContext.delete(exercise)
+        }
+      }
+    }
   }
   
   private func deleteExercise(offsets: IndexSet) {
@@ -71,5 +93,10 @@ struct SettingsSavedExercises: View {
 }
 
 #Preview {
-  SettingsExercises()
+  let preview = Preview()
+  preview.addExamples(SavedExercise.sampleSavedExercises)
+  return NavigationView {
+    SettingsSavedExercises()
+      .modelContainer(preview.container)
+  }
 }

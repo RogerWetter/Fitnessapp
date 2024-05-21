@@ -10,15 +10,15 @@ import SwiftUI
 struct ExerciseRowActiveTraining: View {
   
   let exercise: Exercise
-  let status: SavedExercise?
+  let savedExercise: SavedExercise?
   
   var calculatedStatus: Double {
-    let totalWeightAndReps = status?.sets.reduce(0) { result, set in
+    let totalWeightAndReps = savedExercise?.sets.reduce(0) { result, set in
       return result + (set.weight ?? 0) * (set.repetitions ?? 0)
     } ?? 0
     
     // Assuming you have a total target weight and reps, calculate the progress
-    let totalTargetWeightAndReps = (status?.exercise?.weight ?? 1) * (status?.exercise?.repetitions ?? 1) * (status?.exercise?.sets ?? 1)
+    let totalTargetWeightAndReps = (savedExercise?.exercise?.weight ?? 1) * (savedExercise?.exercise?.repetitions ?? 1) * (savedExercise?.exercise?.sets ?? 1)
     
     return Double(totalWeightAndReps) / Double(totalTargetWeightAndReps)
   }

@@ -66,5 +66,7 @@ struct AllExercisesView: View {
 }
 
 #Preview {
-  AllExercisesView()
+  NavigationView {
+    AllExercisesView()
+  }
 }

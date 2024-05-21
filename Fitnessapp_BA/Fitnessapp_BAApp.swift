@@ -16,7 +16,7 @@ struct Fitnessapp_BAApp: App {
             Exercise.self,
             SavedExercise.self,
         ])
-        let modelConfiguration = ModelConfiguration(schema: schema, isStoredInMemoryOnly: false)
+        let modelConfiguration = ModelConfiguration("DataContainer", schema: schema, isStoredInMemoryOnly: false)
 
         do {
             return try ModelContainer(for: schema, configurations: [modelConfiguration])
@@ -31,4 +31,8 @@ struct Fitnessapp_BAApp: App {
         }
         .modelContainer(sharedModelContainer)
     }
+  
+  init() {
+    print(URL.applicationSupportDirectory.path(percentEncoded: false))
+  }
 }

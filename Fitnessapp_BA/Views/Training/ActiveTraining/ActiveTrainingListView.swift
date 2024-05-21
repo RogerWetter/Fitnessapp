@@ -22,7 +22,7 @@ struct ActiveTrainingListView: View {
             activeTrainingModel.loadSets()
             activeTrainingModel.isShowingList.toggle()
           } label: {
-            ExerciseRowActiveTraining(exercise: activeTrainingModel.training.exercises[idx], status: activeTrainingModel.savedExercises.first(where: { $0.exercise == activeTrainingModel.training.exercises[idx] }))
+            ExerciseRowActiveTraining(exercise: activeTrainingModel.training.exercises[idx], savedExercise: activeTrainingModel.savedExercises.first(where: { $0.exercise == activeTrainingModel.training.exercises[idx] }))
           }
           .buttonStyle(.plain)
         }
