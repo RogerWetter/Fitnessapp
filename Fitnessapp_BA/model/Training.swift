@@ -18,6 +18,9 @@ final class Training {
   
   var exercises: [Exercise] {
     updateLists()
+    if exercisesUnsorted.isEmpty {
+      return []
+    }
     return exercisesOrder.compactMap { id in
       exercisesUnsorted.first { $0.id == id }
     }

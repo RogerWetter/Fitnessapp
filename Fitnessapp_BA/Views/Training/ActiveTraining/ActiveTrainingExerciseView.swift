@@ -9,7 +9,9 @@ import SwiftUI
 
 struct ActiveTrainingExerciseView: View {
   @EnvironmentObject var activeTrainingModel: ActiveTrainingModel
-  @Environment(\.dismiss) var dismiss
+//  @Environment(\.dismiss) var dismiss
+  var dismiss: DismissAction
+
   
     var body: some View {
       VStack(alignment: .leading) {
@@ -131,6 +133,6 @@ struct ActiveTrainingExerciseView: View {
     }
 }
 
-#Preview {
-    ActiveTrainingExerciseView()
-}
+//#Preview {
+//    ActiveTrainingExerciseView()
+//}

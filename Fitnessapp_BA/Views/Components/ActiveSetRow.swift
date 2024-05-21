@@ -24,22 +24,17 @@ struct ActiveSetRow: View {
     
     HStack {
       ActiveTrainingEditNumberButton(number: $weight, isEditing: $isEditing, unit: "kg")
-        .onAppear(perform: {
-          weight = training.exercises[activeExercise].weight
-        })
       ActiveTrainingEditNumberButton(number: $repetitions, isEditing: $isEditing, sysImage: "arrow.clockwise")
-        .onAppear(perform: {
-          repetitions = training.exercises[activeExercise].repetitions
-        })
-      //        ActiveTrainingEditNumberButton(number: $setTime, isEditing: $isEditing, sysImage: "clock.arrow.2.circlepath")
-      //          .onAppear(perform: {
-      //            setTime = training.Exercises[activeExercise].setTime
-      //        })
+//      ActiveTrainingEditNumberButton(number: $setTime, isEditing: $isEditing, sysImage: "clock.arrow.2.circlepath")
       ActiveTrainingEditNumberButton(number: $setPause, isEditing: $isEditing, sysImage: "pause")
-        .onAppear(perform: {
-          setPause = training.exercises[activeExercise].setPause
-        })
+
     }
+    .onAppear(perform: {
+      weight = training.exercises[activeExercise].weight
+      repetitions = training.exercises[activeExercise].repetitions
+//      setTime = training.exercises[activeExercise].setTime
+      setPause = training.exercises[activeExercise].setPause
+    })
   }
 }
 

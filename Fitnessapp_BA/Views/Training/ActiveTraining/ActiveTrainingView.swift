@@ -27,9 +27,9 @@ struct ActiveTrainingView: View {
       } else {
         VStack {
           if activeTrainingModel.isShowingList {
-            ActiveTrainingListView().environmentObject(activeTrainingModel)
+            ActiveTrainingListView(dismiss: dismiss).environmentObject(activeTrainingModel)
           } else {
-            ActiveTrainingExerciseView().environmentObject(activeTrainingModel)
+            ActiveTrainingExerciseView(dismiss: dismiss).environmentObject(activeTrainingModel)
           }
         }
         .navigationTitle(activeTrainingModel.training.name)

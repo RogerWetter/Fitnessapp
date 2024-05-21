@@ -10,18 +10,27 @@ import SwiftUI
 struct ActiveTrainingListView: View {
   
   @EnvironmentObject var activeTrainingModel: ActiveTrainingModel
-  @Environment(\.dismiss) var dismiss
+  var dismiss: DismissAction
   
   var body: some View {
-    List(activeTrainingModel.training.exercises.indices, id: \.self) { idx in
-      HStack {
-        Button {
-          activeTrainingModel.activeExercise = idx
-          activeTrainingModel.isShowingList.toggle()
-        } label: {
-          ExerciseRowActiveTraining(exercise: activeTrainingModel.training.exercises[idx], status: activeTrainingModel.savedExercises.first(where: { $0.exercise == activeTrainingModel.training.exercises[idx] }))
+    List {
+      ForEach(activeTrainingModel.training.exercises.indices, id: \.self) { idx in
+        HStack {
+          Button {
+            activeTrainingModel.saveSets()
+            activeTrainingModel.activeExercise = idx
+            activeTrainingModel.loadSets()
+            activeTrainingModel.isShowingList.toggle()
+          } label: {
+            ExerciseRowActiveTraining(exercise: activeTrainingModel.training.exercises[idx], status: activeTrainingModel.savedExercises.first(where: { $0.exercise == activeTrainingModel.training.exercises[idx] }))
+          }
+          .buttonStyle(.plain)
         }
-        .buttonStyle(.plain)
+      }
+      .onMove { indices, newOffset in
+        if let oldOffset = indices.first {
+          activeTrainingModel.training.moveExercise(from: oldOffset, to: newOffset)
+        }
       }
     }
     HStack {
@@ -53,6 +62,6 @@ struct ActiveTrainingListView: View {
   }
 }
 
-#Preview {
-  ActiveTrainingListView()
-}
+//#Preview {
+//  ActiveTrainingListView()
+//}
