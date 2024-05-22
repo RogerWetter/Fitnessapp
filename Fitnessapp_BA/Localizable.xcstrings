@@ -11,6 +11,16 @@
         }
       }
     },
+    "%@ Analysis" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ Analyse"
+          }
+        }
+      }
+    },
     "%@ Repetitions:" : {
       "extractionState" : "stale",
       "localizations" : {
@@ -224,11 +234,22 @@
       }
     },
     "Analyse View" : {
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Analyse Anzeige"
+          }
+        }
+      }
+    },
+    "Average Weight" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Durchschnittsgewicht"
           }
         }
       }
@@ -300,6 +321,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Neue Muskelgruppe erstellen"
+          }
+        }
+      }
+    },
+    "Date" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Datum"
           }
         }
       }
@@ -568,6 +599,16 @@
         }
       }
     },
+    "No data available for this exercise." : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Keine Daten verfügbar für diese Übung."
+          }
+        }
+      }
+    },
     "Notes" : {
       "localizations" : {
         "de" : {
@@ -739,6 +780,16 @@
         }
       }
     },
+    "Total Weight" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Gesamtgewicht"
+          }
+        }
+      }
+    },
     "Training Title" : {
       "localizations" : {
         "de" : {
@@ -755,6 +806,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Trainingseinheiten"
+          }
+        }
+      }
+    },
+    "Weight" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Gewicht"
           }
         }
       }
