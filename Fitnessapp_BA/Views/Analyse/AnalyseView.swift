@@ -27,14 +27,19 @@ struct AnalyseView: View {
   }
   
   var body: some View {
+    if groupedExercises.isEmpty {
+      Text("There are no Saved Exercises.")
+    }
     List {
       ForEach(groupedExercises.keys.sorted(by: >), id: \.self) { date in
         Section(header: Text(formattedDate(date))) {
           ForEach(groupedExercises[date] ?? []) { savedExercise in
-            NavigationLink {
-              ExerciseAnalyseView(exercise: savedExercise.exercise!)
-            } label: {
-              ExerciseRowActiveTraining(exercise: savedExercise.exercise!, savedExercise: savedExercise)
+            if let exercise = savedExercise.exercise {
+              NavigationLink {
+                ExerciseAnalyseView(exercise: exercise)
+              } label: {
+                ExerciseRowActiveTraining(exercise: savedExercise.exercise!, savedExercise: savedExercise)
+              }
             }
           }
           .onDelete { indexSet in
@@ -50,11 +55,6 @@ struct AnalyseView: View {
         EditButton()
       }
     }
-//    .onAppear(perform: {
-//      for savedExercise in SavedExercise.sampleSavedExercises {
-//        modelContext.insert(savedExercise)
-//      }
-//    })
   }
   
   private var groupedExercises: [Date: [SavedExercise]] {

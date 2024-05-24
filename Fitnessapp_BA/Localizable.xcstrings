@@ -791,6 +791,16 @@
         }
       }
     },
+    "There are no Saved Exercises." : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Es gibt noch keine Übungen zum Analysieren"
+          }
+        }
+      }
+    },
     "This Training has no Exercises Yet." : {
       "localizations" : {
         "de" : {
