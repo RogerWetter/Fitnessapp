@@ -16,8 +16,8 @@ struct Fitnessapp_BAApp: App {
             Exercise.self,
             SavedExercise.self,
         ])
-        let modelConfiguration = ModelConfiguration(schema: schema, isStoredInMemoryOnly: false)
-//        let modelConfiguration = ModelConfiguration("DataContainer", schema: schema, isStoredInMemoryOnly: false)
+//        let modelConfiguration = ModelConfiguration(schema: schema, isStoredInMemoryOnly: false)
+        let modelConfiguration = ModelConfiguration("DataContainer", schema: schema, isStoredInMemoryOnly: false)
 
         do {
             return try ModelContainer(for: schema, configurations: [modelConfiguration])

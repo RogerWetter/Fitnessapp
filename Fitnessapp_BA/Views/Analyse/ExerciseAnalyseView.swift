@@ -14,6 +14,7 @@ struct ExerciseAnalyseView: View {
   @Query(sort: \SavedExercise.timeStamp, order: .reverse) private var savedExercises: [SavedExercise]
   
   @State private var selectedTimePeriod: TimePeriod = .sevenDays
+  @State private var isShowingTotalWeightInfo: Bool = false
   
   enum TimePeriod: String, CaseIterable, Identifiable {
     case sevenDays = "7 Days"
@@ -42,7 +43,7 @@ struct ExerciseAnalyseView: View {
       case .oneMonth:
         return [calendar.date(byAdding: .day, value: -1, to: self.dateRange)!, calendar.date(byAdding: .day, value: 1, to: Date())!]
       case .sixMonths:
-        return [calendar.date(byAdding: .day, value: -7, to: self.dateRange)!, calendar.date(byAdding: .day, value: 7, to: Date())!]
+        return [calendar.date(byAdding: .day, value: -7, to: self.dateRange)!, calendar.date(byAdding: .day, value: 3, to: Date())!]
       }
     }
     
@@ -160,7 +161,7 @@ struct ExerciseAnalyseView: View {
       
       if !aggregatedData.isEmpty {
         HStack {
-          Text("Weight")
+          Text("Weight  [ kg ]")
             .font(.headline)
             .bold()
           Spacer()
@@ -187,10 +188,17 @@ struct ExerciseAnalyseView: View {
         .padding()
         
         HStack {
-          Text("Total Weight")
+          Text("Total Weight  [ kg ]")
             .font(.headline)
             .bold()
           Spacer()
+          Button {
+            isShowingTotalWeightInfo.toggle()
+          } label: {
+            Label("Info", systemImage: "info.circle")
+              .labelStyle(.iconOnly)
+          }
+          .padding(.horizontal)
         }
         
         Chart {
@@ -203,6 +211,7 @@ struct ExerciseAnalyseView: View {
             }
           }
         }
+        .chartXScale(domain: selectedTimePeriod.dateRangeView)
         .chartXAxis {
           AxisMarks(values: .automatic)
         }
@@ -220,6 +229,9 @@ struct ExerciseAnalyseView: View {
     }
     .padding(.horizontal)
     .navigationTitle("\(exercise.name) Analysis")
+    .alert(isPresented: $isShowingTotalWeightInfo, content: {
+      Alert(title: Text("Calculation Total Weight"), message: Text("Weight x Repetitions x Sets = Total Weight"))
+    })
   }
 }
 

@@ -245,6 +245,7 @@
       }
     },
     "Average Weight" : {
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -261,6 +262,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Übung zurück"
+          }
+        }
+      }
+    },
+    "Calculation Total Weight" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Berechnung Gesamtgewicht"
           }
         }
       }
@@ -493,6 +504,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Home"
+          }
+        }
+      }
+    },
+    "Info" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Infos"
           }
         }
       }
@@ -781,11 +802,22 @@
       }
     },
     "Total Weight" : {
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Gesamtgewicht"
+          }
+        }
+      }
+    },
+    "Total Weight  [ kg ]" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Gesamtgewicht  [ kg ]"
           }
         }
       }
@@ -816,6 +848,26 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Gewicht"
+          }
+        }
+      }
+    },
+    "Weight  [ kg ]" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Gewicht  [ kg ]"
+          }
+        }
+      }
+    },
+    "Weight x Repetitions x Sets = Total Weight" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Gewicht x Wiederholungen x Sets = Gesamtgewicht"
           }
         }
       }
