@@ -15,12 +15,19 @@ class ActiveTrainingModel: ObservableObject, Identifiable {
   
   @Bindable var training: Training
   
-  @Published var activeExercise: Int = 0
+  private var activeExerciseIdx: Int = 0
   
-  @Published var weight: Int?
-  @Published var repetitions: Int?
-  //  @Published var setTime: Int?
-  @Published var setPause: Int?
+  var exercise: Exercise {
+    return training.exercises[activeExerciseIdx]
+  }
+  
+  var editableExercise: Binding<Exercise> {
+    return training.getEditableExercise(at: activeExerciseIdx)
+  }
+  
+  var exerciseNumber: Int {
+    return activeExerciseIdx + 1
+  }
   
   @Published var isSetActive = false
   @Published var isShowingList = false
@@ -41,11 +48,11 @@ class ActiveTrainingModel: ObservableObject, Identifiable {
   }
   
   func saveSets() {
-    if let existingSavedExerciseIndex = savedExercises.firstIndex(where: { $0.exercise == training.exercises[activeExercise] }) {
+    if let existingSavedExerciseIndex = savedExercises.firstIndex(where: { $0.exercise == exercise }) {
       savedExercises[existingSavedExerciseIndex].sets = sets
     } else {
       // I am afraid, this has to be like this
-      let exercise = training.exercises[activeExercise]
+//      let exercise = exercise
       let savedExercise = SavedExercise(exercise: nil, sets: sets)
       modelContext.insert(exercise)
       savedExercise.exercise = exercise
@@ -54,7 +61,7 @@ class ActiveTrainingModel: ObservableObject, Identifiable {
   }
   
   func loadSets() {
-    if let existingSavedExerciseIndex = savedExercises.firstIndex(where: { $0.exercise == training.exercises[activeExercise] }) {
+    if let existingSavedExerciseIndex = savedExercises.firstIndex(where: { $0.exercise == exercise }) {
       sets = savedExercises[existingSavedExerciseIndex].sets
     } else {
       sets = []
@@ -65,16 +72,17 @@ class ActiveTrainingModel: ObservableObject, Identifiable {
     isSetActive.toggle()
   }
   
-  func endSet(set: SavedSet) {
-    sets.append(set)
+  func endSet() {
+    sets.append(SavedSet(weight: exercise.weight, repetitions: exercise.repetitions, setPause: exercise.setPause, setTime: exercise.setTime))
     isSetActive.toggle()
+    saveSets()
   }
   
   
   private func backward() {
     saveSets()
-    if activeExercise > 0 {
-      activeExercise -= 1
+    if activeExerciseIdx > 0 {
+      activeExerciseIdx -= 1
     }
     loadSets()
   }
@@ -83,15 +91,21 @@ class ActiveTrainingModel: ObservableObject, Identifiable {
     saveSets()
     nextExercise()
     loadSets()
-    weight = training.exercises[activeExercise].weight
-    repetitions = training.exercises[activeExercise].repetitions
-    //    setTime = training.exercises[activeExercise].setTime
-    setPause = training.exercises[activeExercise].setPause
+  }
+  
+  func changeExercise(to index: Int) {
+    guard index >= 0 && index < training.exercises.count else {
+      return
+    }
+    saveSets()
+    activeExerciseIdx = index
+    loadSets()
+    isShowingList.toggle()
   }
   
   private func nextExercise() {
-    if activeExercise + 1 < training.exercises.count {
-      activeExercise += 1
+    if activeExerciseIdx + 1 < training.exercises.count {
+      activeExerciseIdx += 1
     }
   }
 }

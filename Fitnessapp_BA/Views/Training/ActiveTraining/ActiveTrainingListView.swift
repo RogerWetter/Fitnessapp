@@ -17,10 +17,7 @@ struct ActiveTrainingListView: View {
       ForEach(activeTrainingModel.training.exercises.indices, id: \.self) { idx in
         HStack {
           Button {
-            activeTrainingModel.saveSets()
-            activeTrainingModel.activeExercise = idx
-            activeTrainingModel.loadSets()
-            activeTrainingModel.isShowingList.toggle()
+            activeTrainingModel.changeExercise(to: idx)
           } label: {
             ExerciseRowActiveTraining(exercise: activeTrainingModel.training.exercises[idx], savedExercise: activeTrainingModel.savedExercises.first(where: { $0.exercise == activeTrainingModel.training.exercises[idx] }))
           }

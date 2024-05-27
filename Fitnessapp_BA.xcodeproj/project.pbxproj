@@ -10,6 +10,7 @@
 		DB001ECA2BFC78280012CF40 /* SavedExercisesSamples.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB001EC92BFC78280012CF40 /* SavedExercisesSamples.swift */; };
 		DB001ECC2BFC7C030012CF40 /* PreviewContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB001ECB2BFC7C030012CF40 /* PreviewContainer.swift */; };
 		DB001ECE2BFC8CB80012CF40 /* ExerciseAnalyseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB001ECD2BFC8CB80012CF40 /* ExerciseAnalyseView.swift */; };
+		DB001ED22C0472940012CF40 /* EditNoteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB001ED12C0472940012CF40 /* EditNoteView.swift */; };
 		DB7B2A2D2BE930B600AB7BF3 /* AllExercisesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB7B2A2C2BE930B600AB7BF3 /* AllExercisesView.swift */; };
 		DB7B2A2F2BEB878A00AB7BF3 /* SelectMuscleGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB7B2A2E2BEB878A00AB7BF3 /* SelectMuscleGroup.swift */; };
 		DB7B2A342BEBC3C400AB7BF3 /* SettingsMuscleGroups.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB7B2A332BEBC3C400AB7BF3 /* SettingsMuscleGroups.swift */; };
@@ -82,6 +83,7 @@
 		DB001EC92BFC78280012CF40 /* SavedExercisesSamples.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedExercisesSamples.swift; sourceTree = "<group>"; };
 		DB001ECB2BFC7C030012CF40 /* PreviewContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewContainer.swift; sourceTree = "<group>"; };
 		DB001ECD2BFC8CB80012CF40 /* ExerciseAnalyseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseAnalyseView.swift; sourceTree = "<group>"; };
+		DB001ED12C0472940012CF40 /* EditNoteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditNoteView.swift; sourceTree = "<group>"; };
 		DB7B2A2C2BE930B600AB7BF3 /* AllExercisesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllExercisesView.swift; sourceTree = "<group>"; };
 		DB7B2A2E2BEB878A00AB7BF3 /* SelectMuscleGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectMuscleGroup.swift; sourceTree = "<group>"; };
 		DB7B2A332BEBC3C400AB7BF3 /* SettingsMuscleGroups.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsMuscleGroups.swift; sourceTree = "<group>"; };
@@ -316,6 +318,7 @@
 				DBC981372BF9F736003F6662 /* ActiveTrainingListView.swift */,
 				DBC981392BFA0483003F6662 /* ActiveTrainingModel.swift */,
 				DBC9813B2BFB2CAA003F6662 /* ActiveTrainingExerciseView.swift */,
+				DB001ED12C0472940012CF40 /* EditNoteView.swift */,
 			);
 			path = ActiveTraining;
 			sourceTree = "<group>";
@@ -497,6 +500,7 @@
 				DBC414782BDF790300E0F1FE /* Fitnessapp_BAApp.swift in Sources */,
 				DBFB34FB2BF3C4C500892DCB /* ExerciseRowActiveTraining.swift in Sources */,
 				DB94AADD2BE40FCE00E80D37 /* CameraPickerView.swift in Sources */,
+				DB001ED22C0472940012CF40 /* EditNoteView.swift in Sources */,
 				DBFB35052BF6679A00892DCB /* ActiveTrainingEditNumberButton.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

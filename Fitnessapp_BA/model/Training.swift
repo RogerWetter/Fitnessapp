@@ -7,6 +7,7 @@
 
 import Foundation
 import SwiftData
+import SwiftUI
 
 @Model
 final class Training {
@@ -63,6 +64,21 @@ final class Training {
     exercisesUnsorted.removeAll(where: {$0.id == exercise.id})
     exercisesOrder.removeAll(where: {$0 == exercise.id})
   }
+  
+  func getEditableExercise(at index: Int) -> Binding<Exercise> {
+    guard index < exercisesOrder.count else {
+      fatalError("Index out of bounds")
+    }
+    let exerciseID = exercisesOrder[index]
+    guard let exerciseIndex = exercisesUnsorted.firstIndex(where: { $0.id == exerciseID }) else {
+      fatalError("Exercise not found")
+    }
+    return Binding(
+      get: { self.exercisesUnsorted[exerciseIndex] },
+      set: { self.exercisesUnsorted[exerciseIndex] = $0 }
+    )
+  }
+  
   
   func moveExercise(from sourceIndex: Int, to destinationIndex: Int) {
     guard sourceIndex != destinationIndex else { return }

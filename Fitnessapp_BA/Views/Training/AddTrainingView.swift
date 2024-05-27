@@ -30,7 +30,7 @@ struct AddTrainingView: View {
         }
         .toolbar {
           ToolbarItemGroup(placement: .navigationBarLeading) {
-            Button(action: dismissAction) {
+            Button(action: {dismiss()}) {
               Text("Cancel")
             }
             .foregroundColor(.red)
@@ -44,10 +44,6 @@ struct AddTrainingView: View {
           }
         }
     }
-  }
-  
-  private func dismissAction() {
-    dismiss()
   }
   
   private func createTraining() {
